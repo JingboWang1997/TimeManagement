@@ -24,30 +24,10 @@ export default class CategoriesLayout extends React.Component {
     const { categories } = this.state;
     var categoriesComponents = [];
     if (categories !== null) {
-      var curRow = [];
       for (var i = 0; i < categories.length; i++) {
         var category = categories[i];
-        var component =  (
-          <Grid item xs key={i}>
-            <Category data={category} />
-          </Grid>
-        );
-        if (curRow.length < 3) {
-          curRow.push(component);
-        } else {
-          categoriesComponents.push(
-            <Grid key={categoriesComponents.length} container spacing={3}>
-              {curRow}
-            </Grid>
-          );
-          curRow = [component];
-        }
+        categoriesComponents.push(<Category data={category} />);
       }
-      categoriesComponents.push(
-        <Grid key={categoriesComponents.length} container spacing={3}>
-          {curRow}
-        </Grid>
-      );
     }
         
     return (
