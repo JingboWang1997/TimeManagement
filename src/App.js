@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import Category from './components/Category'
+import CategoriesLayout from './layouts/CategoriesLayout'
 
 function App() {
     return (
         <div className="App">
-            <Category/>
+            <CategoriesLayout/>
         </div>
     );
 }
