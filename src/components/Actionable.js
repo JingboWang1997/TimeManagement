@@ -1,24 +1,24 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { Checkbox } from '@material-ui/core';
-import { Note, Row } from '../styles/StyledComponents';
+import { Note, NoMarginP, CenteredRow, Col } from '../styles/StyledComponents';
 
 export default class Actionable extends React.Component {
   render() {
-    const { style } = this.props;
     return (
-      <Row style={style, {alignItems: 'center'}}>
-        <Checkbox
-          checked={false}
-        />
-            actionable
-        <Note style={{paddingLeft: 10}}>estimated duration</Note>
-      </Row>
+      <Col style={{width: '100%', alignItems: 'start'}}>
+        <CenteredRow style={{justifyContent: 'space-between', width: '100%'}}>
+          <CenteredRow>
+            <Checkbox
+              checked={false}
+            />
+            <NoMarginP>actionable</NoMarginP>
+          </CenteredRow>
+          <Note>estimated duration</Note>
+          <NoMarginP>before date</NoMarginP>
+        </CenteredRow>
+        <Note style={{paddingLeft: 40}}>note</Note>
+      </Col>
     );
   }
 }
-
-Actionable.propTypes = {
-  style: PropTypes.object
-};

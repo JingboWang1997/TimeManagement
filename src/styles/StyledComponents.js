@@ -15,6 +15,10 @@ export const Row = styled.div`
     flex-direction: row;
 `;
 
+export const CenteredRow = styled(Row)`
+    align-items: center;
+`;
+
 export const Col = styled.div`
     display: flex; 
     flex-direction: column;

@@ -1,10 +1,28 @@
 {
     "data": [
         {
-            "category": "Software"
+            "category": "Software",
+            "commitments": [
+                {
+                    "commitment": "Time Management"
+                },
+                {
+                    "commitment": "Personal Website"
+                }
+            ]
         },
         {
-            "category": "Machine Learning"
+            "category": "Machine Learning",
+            "commitments": [
+                {
+                    "commitment": "Read Paper (Backward Feature...)",
+                    "note": "https://www.pyimagesearch.com/2020/06/01/opencv-social-distancing-detector/"
+                },
+                {
+                    "commitment": "Social Distancing CV Tutorial",
+                    "note": "https://t.dripemail2.com/c/eyJhY2NvdW50X2lkIjoiNDc2ODQyOSIsImRlbGl2ZXJ5X2lkIjoiM3FiNHQ2MXZ1ODQ2N2x1N3EzZ3QiLCJ1cmwiOiJodHRwczovL3d3dy5weWltYWdlc2VhcmNoLmNvbS8yMDIwLzA2LzAxL29wZW5jdi1zb2NpYWwtZGlzdGFuY2luZy1kZXRlY3Rvci8_X19zPTJ2ZWQ3dzZzM3NyYzNmeHlna2F4In0"
+                }
+            ]
         },
         {
             "category": "Miscellaneous"

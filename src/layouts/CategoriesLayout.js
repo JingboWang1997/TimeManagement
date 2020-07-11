@@ -22,20 +22,22 @@ export default class CategoriesLayout extends React.Component {
 
   render() {
     const { categories } = this.state;
-    var categoriesComponents = [];
-    if (categories !== null) {
-      for (var i = 0; i < categories.length; i++) {
-        var category = categories[i];
-        categoriesComponents.push(<Category data={category} />);
-      }
-    }
-        
+
     return (
-      <div>
-        <Grid container>
-          {categoriesComponents}
-        </Grid>
-      </div>
+      <Grid container spacing={3} style={{padding: '2%'}}>
+        {constructCategoryComponents(categories)}
+      </Grid>
     );
   }
+}
+
+// constructCategoryComponents constructs a list of Category Grid components from a list of category objects
+function constructCategoryComponents(categories) {
+  return categories ?
+    categories.map(category => (
+      <Grid item key={category.category}>
+        <Category data={category}/>
+      </Grid>
+    )) :
+    [];
 }
