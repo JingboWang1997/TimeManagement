@@ -1,15 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { NoMarginP, Note } from '../styles/StyledComponents';
+import { NoMarginP } from '../styles/StyledComponents';
 
 export default class CommitmentHeader extends React.Component {
   render() {
-    const { commitment, note } = this.props.commitment;
+    const { commitment, url } = this.props.commitment;
+    var moreInfo = url ? 
+      <a href={url}>More Info</a> :
+      null;
     return (
-      <div style={{display: 'flex', flexDirection: 'column', alignItems: 'start', backgroundColor: 'green'}}>
+      <div style={{display: 'flex', flexDirection: 'column', alignItems: 'start'}}>
         <NoMarginP style={{fontWeight: 'bolder'}}>{commitment}</NoMarginP>
-        <Note style={{backgroundColor: 'red', width: '100%', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden'}}>{note}</Note>
+        {moreInfo}
+        {/* <Note style={{width: '100%', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden'}}>{note}</Note> */}
       </div>
     );
   }
@@ -18,6 +22,6 @@ export default class CommitmentHeader extends React.Component {
 CommitmentHeader.propTypes = {
   commitment: PropTypes.shape({
     commitment: PropTypes.string,
-    note: PropTypes.string
+    url: PropTypes.string
   })
 };

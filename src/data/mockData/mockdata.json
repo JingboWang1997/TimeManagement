@@ -4,7 +4,15 @@
             "category": "Software",
             "commitments": [
                 {
-                    "commitment": "Time Management"
+                    "commitment": "Time Management",
+                    "actionables": [
+                        {
+                            "actionable": "plan first version",
+                            "estimatedDuration": "30min",
+                            "beforeDate": "7/18",
+                            "note": "The first version should include publishing this site and connected to db and user logins. After this planning, expect more actionables to be generated for this commitment"
+                        }
+                    ]
                 },
                 {
                     "commitment": "Personal Website"
@@ -16,11 +24,11 @@
             "commitments": [
                 {
                     "commitment": "Read Paper (Backward Feature...)",
-                    "note": "https://www.pyimagesearch.com/2020/06/01/opencv-social-distancing-detector/"
+                    "url": "https://www.pyimagesearch.com/2020/06/01/opencv-social-distancing-detector/"
                 },
                 {
                     "commitment": "Social Distancing CV Tutorial",
-                    "note": "https://t.dripemail2.com/c/eyJhY2NvdW50X2lkIjoiNDc2ODQyOSIsImRlbGl2ZXJ5X2lkIjoiM3FiNHQ2MXZ1ODQ2N2x1N3EzZ3QiLCJ1cmwiOiJodHRwczovL3d3dy5weWltYWdlc2VhcmNoLmNvbS8yMDIwLzA2LzAxL29wZW5jdi1zb2NpYWwtZGlzdGFuY2luZy1kZXRlY3Rvci8_X19zPTJ2ZWQ3dzZzM3NyYzNmeHlna2F4In0"
+                    "url": "https://t.dripemail2.com/c/eyJhY2NvdW50X2lkIjoiNDc2ODQyOSIsImRlbGl2ZXJ5X2lkIjoiM3FiNHQ2MXZ1ODQ2N2x1N3EzZ3QiLCJ1cmwiOiJodHRwczovL3d3dy5weWltYWdlc2VhcmNoLmNvbS8yMDIwLzA2LzAxL29wZW5jdi1zb2NpYWwtZGlzdGFuY2luZy1kZXRlY3Rvci8_X19zPTJ2ZWQ3dzZzM3NyYzNmeHlna2F4In0"
                 }
             ]
         },
