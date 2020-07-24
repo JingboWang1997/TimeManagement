@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Paper } from '@material-ui/core';
 
+// CategoryHeader represents the header (title and the hovering paper) of a category card
 export default class CategoryHeader extends React.Component {
   render() {
     const { category } = this.props;

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Checkbox } from '@material-ui/core';
 import { Note, NoMarginP, CenteredRow, Col } from '../styles/StyledComponents';
 
+// Actionable represents the smallest unit with a check box and related info of an actionable item
 export default class Actionable extends React.Component {
   render() {
     const { actionable, estimatedDuration, beforeDate, note } = this.props.actionable;

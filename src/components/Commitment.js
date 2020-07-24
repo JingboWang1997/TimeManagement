@@ -5,15 +5,13 @@ import CommitmentHeader from './CommitmentHeader';
 import Actionable from './Actionable';
 import { Col } from '../styles/StyledComponents';
 
-
-
+// Commitment represents each commitment item in the category content, which is the parent of a list of acitionables
 export default class Commitment extends React.Component {
-
-  buildActionableComponents(actionables) {
+  // constructActionableComponents constructs a list of Actionable components from a list of actionable objects
+  constructActionableComponents(actionables) {
     return actionables ? 
       actionables.map(a => <Actionable key={a.Actionable} actionable={a} />) :
       [];
-  
   }
 
   render() {
@@ -22,7 +20,7 @@ export default class Commitment extends React.Component {
     return (
       <Col style={style}>
         <CommitmentHeader commitment={commitment}/>
-        {this.buildActionableComponents(actionables)}
+        {this.constructActionableComponents(actionables)}
       </Col>
     );
   }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { NoMarginP } from '../styles/StyledComponents';
 
+// CommitmentHeader represents the header for each commitment, including the title and note
 export default class CommitmentHeader extends React.Component {
   render() {
     const { commitment, url } = this.props.commitment;
