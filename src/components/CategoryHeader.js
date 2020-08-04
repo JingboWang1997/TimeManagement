@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 // UI import
 import { Paper, IconButton } from '@material-ui/core';
 import RemoveIcon from '@material-ui/icons/Remove';
+import EditIcon from '@material-ui/icons/Edit';
 
 // styled components
-import { CenteredRow } from '../styles/StyledComponents';
+import { Row } from '../styles/StyledComponents';
 
 // redux
 import { connect } from 'react-redux';
@@ -29,20 +30,31 @@ class CategoryHeader extends React.Component {
       .then(() => dispatchDeleteCategoryAction(id));
   }
 
+  // handleClickEdit edits current category
+  handleClickEdit() {
+    console.log('click edit');
+  }
+
   render() {
     const { name } = this.props;
     return (
       <div>
         <Paper elevation={2} style={{ padding: 5 }}>
-          <CenteredRow style={{ justifyContent: 'center', position: 'relative' }}>
+          <Row style={{ position: 'relative' }}>
             <h2 style={{ margin: 10 }}>{name}</h2>
-            <IconButton
-              style={{ position: 'absolute', rop: 0, right: 0 }}
-              onClick={this.handleClickDelete}
-            >
-              <RemoveIcon style={{ color: 'red' }}/>
-            </IconButton>
-          </CenteredRow>
+            <Row style={{ position: 'absolute', rop: 0, right: 0 }}>
+              <IconButton
+                onClick={this.handleClickEdit}
+              >
+                <EditIcon />
+              </IconButton>
+              <IconButton
+                onClick={this.handleClickDelete}
+              >
+                <RemoveIcon style={{ color: 'red' }}/>
+              </IconButton>
+            </Row>
+          </Row>
         </Paper>
       </div>
     );
