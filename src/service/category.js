@@ -23,3 +23,9 @@ export function addCategory(category) {
   console.log(log + 'addCategory');
   return collectionRef.add(category);
 }
+
+// deleteCategory deletes the category with the provided id
+export function deleteCategory(id) {
+  console.log(log + 'deleteCategory');
+  return collectionRef.doc(id).delete();
+}

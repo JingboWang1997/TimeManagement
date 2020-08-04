@@ -26,7 +26,7 @@ class Modal extends React.Component {
     const { dispatchAddCategoryAction, dispatchSetModalAction } = this.props;
     addCategory({name})
       .then(docRef => docRef.get())
-      .then(docSnapshot => dispatchAddCategoryAction(docSnapshot.data()));
+      .then(docSnapshot => dispatchAddCategoryAction(Object.assign({id: docSnapshot.id}, docSnapshot.data())));
     dispatchSetModalAction(false);
   }
 
