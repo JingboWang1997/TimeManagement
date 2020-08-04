@@ -10,7 +10,7 @@ export default class Commitment extends React.Component {
   // constructActionableComponents constructs a list of Actionable components from a list of actionable objects
   constructActionableComponents(actionables) {
     return actionables ? 
-      actionables.map(a => <Actionable key={a.Actionable} actionable={a} />) :
+      actionables.map(a => <Actionable key={a.name} actionable={a} />) :
       [];
   }
 

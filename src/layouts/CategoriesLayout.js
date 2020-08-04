@@ -1,46 +1,68 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
+// UI import
 import { Grid } from '@material-ui/core';
 
-import { getCategories } from '../service/category';
-
+// components
 import Category from '../components/Category';
 
+// service
+import { getCategories } from '../service/category';
+
+// redux
+import { getCategoriesAction } from '../redux/actions/categoryActions';
+import { connect } from 'react-redux';
+
 // CategoriesLayout lays out the category cards in a list
-export default class CategoriesLayout extends React.Component {
+class CategoriesLayout extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      categories: null
-    };
-  }
+    this.constructCategoryComponents = this.constructCategoryComponents.bind(this);
+  } 
 
   componentDidMount() {
-    getCategories()
-      .then(data => this.setState({
-        categories: data
-      }));
+    const { dispatchGetCategories } = this.props;
+    getCategories().then(categories => dispatchGetCategories(categories));
   }
 
   // constructCategoryComponents constructs a list of Category Grid components from a list of category objects
-  constructCategoryComponents(categories) {
+  constructCategoryComponents() {
+    const { categories } = this.props;
     return categories ?
       categories.map(category => (
-        <Grid item key={category.category}>
-          <Category data={category}/>
+        <Grid item key={category.name}>
+          <Category category={category}/>
         </Grid>
       )) :
       [];
   }
 
   render() {
-    const { categories } = this.state;
-
     return (
       <Grid container spacing={3} style={{padding: '2%'}}>
-        {this.constructCategoryComponents(categories)}
+        {this.constructCategoryComponents()}
       </Grid>
     );
   }
 }
+
+CategoriesLayout.propTypes = {
+  dispatchGetCategories: PropTypes.func,
+  categories: PropTypes.array
+};
+
+const mapStateToProps = (state) => {
+  return {
+    categories: state.categoryReducer.categories
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatchGetCategories: (categories) => dispatch(getCategoriesAction(categories)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoriesLayout);
 

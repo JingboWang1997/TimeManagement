@@ -1,13 +1,13 @@
 {
-    "data": [
+    "categories": [
         {
-            "category": "Software",
+            "name": "Software",
             "commitments": [
                 {
                     "commitment": "Time Management",
                     "actionables": [
                         {
-                            "actionable": "plan first version",
+                            "name": "plan first version",
                             "estimatedDuration": "30min",
                             "beforeDate": "7/18",
                             "note": "The first version should include publishing this site and connected to db and user logins. After this planning, expect more actionables to be generated for this commitment"
@@ -20,7 +20,7 @@
             ]
         },
         {
-            "category": "Machine Learning",
+            "name": "Machine Learning",
             "commitments": [
                 {
                     "commitment": "Read Paper (Backward Feature...)",
@@ -33,13 +33,13 @@
             ]
         },
         {
-            "category": "Miscellaneous"
+            "name": "Miscellaneous"
         },
         {
-            "category": "Dance"
+            "name": "Dance"
         },
         {
-            "category": "Wait"
+            "name": "Wait"
         }
     ]  
 }

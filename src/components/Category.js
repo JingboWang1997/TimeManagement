@@ -9,12 +9,12 @@ import CategoryContent from './CategoryContent';
 // Category represents each category card
 export default class Category extends React.Component {
   render() {
-    const { data, style } = this.props;
-    const { category, commitments } = data;
+    const { category, style } = this.props;
+    const { name, commitments, id } = category;
     return (
       <div>
         <Paper elevation={2} style={style, {width: 400, height: 500}}>
-          <CategoryHeader category={category}/>
+          <CategoryHeader name={name} id={id}/>
           <CategoryContent commitments={commitments}/>
         </Paper>
       </div>
@@ -23,8 +23,9 @@ export default class Category extends React.Component {
 }
 
 Category.propTypes = {
-  data: PropTypes.shape({
-    category: PropTypes.string,
+  category: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
     commitments: PropTypes.array,
   }),
   style: PropTypes.object,

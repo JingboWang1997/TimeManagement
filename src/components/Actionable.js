@@ -7,7 +7,7 @@ import { Note, NoMarginP, CenteredRow, Col } from '../styles/StyledComponents';
 // Actionable represents the smallest unit with a check box and related info of an actionable item
 export default class Actionable extends React.Component {
   render() {
-    const { actionable, estimatedDuration, beforeDate, note } = this.props.actionable;
+    const { name, estimatedDuration, beforeDate, note } = this.props.actionable;
     return (
       <Col style={{width: '100%', alignItems: 'start'}}>
         <CenteredRow style={{justifyContent: 'space-between', width: '100%'}}>
@@ -15,7 +15,7 @@ export default class Actionable extends React.Component {
             <Checkbox
               checked={false}
             />
-            <NoMarginP>{actionable}</NoMarginP>
+            <NoMarginP>{name}</NoMarginP>
           </CenteredRow>
           <Note>{estimatedDuration}</Note>
           <NoMarginP>by {beforeDate}</NoMarginP>
@@ -27,8 +27,10 @@ export default class Actionable extends React.Component {
 }
 
 Actionable.propTypes = {
-  actionable: PropTypes.string,
-  estimatedDuration: PropTypes.string,
-  beforeDate: PropTypes.string,
-  note: PropTypes.string
+  actionable: PropTypes.shape({
+    name: PropTypes.string,
+    estimatedDuration: PropTypes.string,
+    beforeDate: PropTypes.string,
+    note: PropTypes.string
+  })
 };
