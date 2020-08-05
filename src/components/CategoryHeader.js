@@ -11,7 +11,8 @@ import { Row } from '../styles/StyledComponents';
 
 // redux
 import { connect } from 'react-redux';
-import { deleteCategoryAction } from '../redux/actions/categoryActions';
+import { deleteCategoryAction, EDIT_CATEGORY } from '../redux/actions/categoryActions';
+import { setModalAction } from '../redux/actions/uiStateActions';
 
 // services
 import { deleteCategory } from '../service/category';
@@ -21,6 +22,7 @@ class CategoryHeader extends React.Component {
   constructor(props) {
     super(props);
     this.handleClickDelete = this.handleClickDelete.bind(this);
+    this.handleClickEdit = this.handleClickEdit.bind(this);
   }
 
   // handleClickDelete deletes current category
@@ -32,7 +34,8 @@ class CategoryHeader extends React.Component {
 
   // handleClickEdit edits current category
   handleClickEdit() {
-    console.log('click edit');
+    const { dispatchSetModalAction } = this.props;
+    dispatchSetModalAction(true, EDIT_CATEGORY);
   }
 
   render() {
@@ -64,12 +67,14 @@ class CategoryHeader extends React.Component {
 CategoryHeader.propTypes = {
   name: PropTypes.string,
   id: PropTypes.string,
-  dispatchDeleteCategoryAction: PropTypes.func
+  dispatchDeleteCategoryAction: PropTypes.func,
+  dispatchSetModalAction: PropTypes.func
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     dispatchDeleteCategoryAction: (id) => dispatch(deleteCategoryAction(id)),
+    dispatchSetModalAction: (open, task) => dispatch(setModalAction(open, task))
   };
 };
 

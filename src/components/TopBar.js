@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 // redux
 import { connect } from 'react-redux';
 import { setModalAction } from '../redux/actions/uiStateActions';
+import { ADD_CATEGORY } from '../redux/actions/categoryActions';
 
 // UI ipmorts
 import AddIcon from '@material-ui/icons/Add';
@@ -22,7 +23,7 @@ export class TopBar extends React.Component {
     return (
       <Row style={{justifyContent: 'flex-end', paddingRight: '5%', paddingTop: '1%'}}>
         <IconButton
-          onClick={() => dispatchSetModalAction(true)}
+          onClick={() => dispatchSetModalAction(true, ADD_CATEGORY)}
         >
           <AddIcon 
             fontSize='large'
@@ -40,7 +41,7 @@ TopBar.propTypes = {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    dispatchSetModalAction: (open) => dispatch(setModalAction(open)),
+    dispatchSetModalAction: (open, task) => dispatch(setModalAction(open, task)),
   };
 };
 

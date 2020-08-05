@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // redux
 import { connect } from 'react-redux';
 import { setModalAction } from '../redux/actions/uiStateActions';
-import { addCategoryAction } from '../redux/actions/categoryActions';
+import { addCategoryAction, EDIT_CATEGORY, ADD_CATEGORY } from '../redux/actions/categoryActions';
 
 // UI ipmorts
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, Button } from '@material-ui/core';
@@ -31,14 +31,26 @@ class Modal extends React.Component {
   }
 
   render() {
-    const { open, dispatchSetModalAction } = this.props;
+    const { open, dispatchSetModalAction, task } = this.props;
+    var title = '';
+    var description = '';
+    switch (task) {
+    case EDIT_CATEGORY:
+      title = 'Edit a Category';
+      description = 'Edit the name of this category to make it more descriptive';
+      break;
+    case ADD_CATEGORY:
+      title = 'Add a New Category';
+      description = 'Add a new category includes a whole new set of commitments. This can be a new habit or aspect of life you want to expand to';
+      break;
+    }
     return (
       <div>
         <Dialog open={open} onClose={() => dispatchSetModalAction(false)}>
-          <DialogTitle>Add a new category</DialogTitle>
+          <DialogTitle>{title}</DialogTitle>
           <DialogContent>
             <DialogContentText>
-            Add a new category includes a whole new set of commitments. This can be a new habit or aspect of life you want to expand to.
+              {description}
             </DialogContentText>
             <TextField
               autoFocus
@@ -68,13 +80,15 @@ class Modal extends React.Component {
 
 Modal.propTypes = {
   open: PropTypes.bool,
+  task: PropTypes.string,
   dispatchSetModalAction: PropTypes.func,
   dispatchAddCategoryAction: PropTypes.func
 };
 
 const mapStateToProps = (state) => {
   return {
-    open: state.uiStateReducer.modalOpen
+    open: state.uiStateReducer.modalOpen,
+    task: state.uiStateReducer.modalTask
   };
 };
   
