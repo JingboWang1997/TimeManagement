@@ -3,35 +3,41 @@ import PropTypes from 'prop-types';
 
 // redux
 import { connect } from 'react-redux';
-import { setModalAction } from '../redux/actions/uiStateActions';
-import { addCategoryAction, EDIT_CATEGORY, ADD_CATEGORY } from '../redux/actions/categoryActions';
+import { closeModalAction, editModalDataAction } from '../redux/actions/uiStateActions';
+import { addCategoryAction, editCategoryAction, EDIT_CATEGORY, ADD_CATEGORY } from '../redux/actions/categoryActions';
 
 // UI ipmorts
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, Button } from '@material-ui/core';
 
 // services
-import { addCategory } from '../service/category';
+import { addCategory, editCategory } from '../service/category';
 
 // Modal represents
 class Modal extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { name: '' };
     this.handleClickSave = this.handleClickSave.bind(this);
   }
 
   // handleClickSave writes current data to db and update the store
   handleClickSave() {
-    const { name } = this.state;
-    const { dispatchAddCategoryAction, dispatchSetModalAction } = this.props;
-    addCategory({name})
-      .then(docRef => docRef.get())
-      .then(docSnapshot => dispatchAddCategoryAction(Object.assign({id: docSnapshot.id}, docSnapshot.data())));
-    dispatchSetModalAction(false);
+    const { dispatchAddCategoryAction, dispatchCloseModalAction, dispatchEditCategoryAction, data, task } = this.props;
+    switch (task) {
+    case EDIT_CATEGORY:
+      editCategory(data)
+        .then(() => dispatchEditCategoryAction(data));
+      break;
+    case ADD_CATEGORY:
+      addCategory(data)
+        .then(docRef => docRef.get())
+        .then(docSnapshot => dispatchAddCategoryAction(Object.assign({id: docSnapshot.id}, docSnapshot.data())));
+      break;
+    }
+    dispatchCloseModalAction();
   }
 
   render() {
-    const { open, dispatchSetModalAction, task } = this.props;
+    const { open, task, data, dispatchCloseModalAction, dispatchEditModalDataAction } = this.props;
     var title = '';
     var description = '';
     switch (task) {
@@ -46,7 +52,7 @@ class Modal extends React.Component {
     }
     return (
       <div>
-        <Dialog open={open} onClose={() => dispatchSetModalAction(false)}>
+        <Dialog open={open} onClose={dispatchCloseModalAction}>
           <DialogTitle>{title}</DialogTitle>
           <DialogContent>
             <DialogContentText>
@@ -57,15 +63,12 @@ class Modal extends React.Component {
               margin="dense"
               label="name"
               fullWidth
-              onChange={(event) => {
-                this.setState({
-                  name: event.target.value
-                });
-              }}
+              onChange={(event) => dispatchEditModalDataAction(Object.assign(data, {name: event.target.value}))}
+              value={data.name}
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => dispatchSetModalAction(false)} color="primary">
+            <Button onClick={dispatchCloseModalAction} color="primary">
             Cancel
             </Button>
             <Button onClick={this.handleClickSave} color="primary">
@@ -81,21 +84,28 @@ class Modal extends React.Component {
 Modal.propTypes = {
   open: PropTypes.bool,
   task: PropTypes.string,
-  dispatchSetModalAction: PropTypes.func,
-  dispatchAddCategoryAction: PropTypes.func
+  data: PropTypes.object,
+  dispatchCloseModalAction: PropTypes.func,
+  dispatchAddCategoryAction: PropTypes.func,
+  dispatchEditModalDataAction: PropTypes.func,
+  dispatchEditCategoryAction: PropTypes.func
 };
 
 const mapStateToProps = (state) => {
+  const { modalOpen, modalTask, modalData } = state.uiStateReducer;
   return {
-    open: state.uiStateReducer.modalOpen,
-    task: state.uiStateReducer.modalTask
+    open: modalOpen,
+    task: modalTask,
+    data: modalData
   };
 };
   
 const mapDispatchToProps = (dispatch) => {
   return {
-    dispatchSetModalAction: (open) => dispatch(setModalAction(open)),
-    dispatchAddCategoryAction: (category) => dispatch(addCategoryAction(category))
+    dispatchCloseModalAction: () => dispatch(closeModalAction()),
+    dispatchAddCategoryAction: (category) => dispatch(addCategoryAction(category)),
+    dispatchEditModalDataAction: (data) => dispatch(editModalDataAction(data)),
+    dispatchEditCategoryAction: (category) => dispatch(editCategoryAction(category))
   };
 };
 

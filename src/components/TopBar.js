@@ -23,7 +23,7 @@ export class TopBar extends React.Component {
     return (
       <Row style={{justifyContent: 'flex-end', paddingRight: '5%', paddingTop: '1%'}}>
         <IconButton
-          onClick={() => dispatchSetModalAction(true, ADD_CATEGORY)}
+          onClick={() => dispatchSetModalAction(ADD_CATEGORY, {name: ''})}
         >
           <AddIcon 
             fontSize='large'
@@ -41,7 +41,7 @@ TopBar.propTypes = {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    dispatchSetModalAction: (open, task) => dispatch(setModalAction(open, task)),
+    dispatchSetModalAction: (task, data) => dispatch(setModalAction(task, data)),
   };
 };
 

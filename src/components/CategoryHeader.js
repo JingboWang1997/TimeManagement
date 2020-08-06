@@ -34,8 +34,8 @@ class CategoryHeader extends React.Component {
 
   // handleClickEdit edits current category
   handleClickEdit() {
-    const { dispatchSetModalAction } = this.props;
-    dispatchSetModalAction(true, EDIT_CATEGORY);
+    const { dispatchSetModalAction, name, id } = this.props;
+    dispatchSetModalAction(EDIT_CATEGORY, {name, id});
   }
 
   render() {
@@ -74,7 +74,7 @@ CategoryHeader.propTypes = {
 const mapDispatchToProps = (dispatch) => {
   return {
     dispatchDeleteCategoryAction: (id) => dispatch(deleteCategoryAction(id)),
-    dispatchSetModalAction: (open, task) => dispatch(setModalAction(open, task))
+    dispatchSetModalAction: (task, data) => dispatch(setModalAction(task, data))
   };
 };
 
