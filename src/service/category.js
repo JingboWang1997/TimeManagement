@@ -12,6 +12,7 @@ export function getMockCategories() {
 }
 
 // getCategories gets all the categories from the db
+// TODO: get only categories of a user_id
 export function getCategories() {
   // console.log(log + 'getCategories');
   return collectionRef.get()
@@ -19,6 +20,7 @@ export function getCategories() {
 }
 
 // addCategory adds a new category
+// TODO: create a category for a user_id
 export function addCategory(category) {
   // console.log(log + 'addCategory');
   return collectionRef.add(category);
