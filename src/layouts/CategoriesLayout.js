@@ -23,8 +23,8 @@ class CategoriesLayout extends React.Component {
 
   componentDidMount() {
     const { dispatchGetCategories } = this.props;
-    dispatchGetCategories(getMockCategories());
-    // getCategories().then(categories => dispatchGetCategories(categories));
+    // dispatchGetCategories(getMockCategories());
+    getCategories('user_id').then(categories => dispatchGetCategories(categories));
   }
 
   // constructCategoryComponents constructs a list of Category Grid components from a list of category objects

@@ -23,7 +23,7 @@ export class TopBar extends React.Component {
     return (
       <Row style={{justifyContent: 'flex-end', paddingRight: '5%', paddingTop: '1%'}}>
         <IconButton
-          onClick={() => dispatchSetModalAction(ADD_CATEGORY, {name: ''})}
+          onClick={() => dispatchSetModalAction(ADD_CATEGORY, {name: '', user_id: 'user_id'})}
         >
           <AddIcon 
             fontSize='large'
