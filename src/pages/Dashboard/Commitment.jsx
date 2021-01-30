@@ -1,15 +1,26 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+
+import { Header3, Header4, BodyText, Colors } from "../../styles/GlobalStyles";
 import Actionable from "./Actionable";
 
 const Commitment = ({ title, deadline, actionables }) => {
   return (
     <div style={{ width: 440 }}>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <div style={{ display: "flex" }}>
-          <Typography>Commitment</Typography>
-          <Typography>(Jan 14)</Typography>
+      {/* COMMITMENT TITLE */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginBottom: 8,
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <Header3>Commitment</Header3>
+          <Header4 style={{ marginLeft: 16, fontWeight: 500 }}>
+            (Jan 14)
+          </Header4>
         </div>
         <MoreVertIcon />
       </div>
@@ -17,7 +28,9 @@ const Commitment = ({ title, deadline, actionables }) => {
       {/* LIST OF ACTIONABLES */}
       <Actionable />
 
-      <Typography>Create a new actionable</Typography>
+      <BodyText style={{ color: Colors.Stone, textAlign: "center" }}>
+        Create a new actionable
+      </BodyText>
     </div>
   );
 };
