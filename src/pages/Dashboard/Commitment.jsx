@@ -2,17 +2,21 @@ import React from "react";
 import PropTypes from "prop-types";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
-import { Header3, Header4, BodyText, Colors } from "../../styles/GlobalStyles";
+import {
+  Header3,
+  Header4,
+  BodyText,
+  Colors,
+  FlexBetween,
+} from "../../styles/GlobalStyles";
 import Actionable from "./Actionable";
 
 const Commitment = ({ title, deadline, actionables }) => {
   return (
     <div style={{ padding: "24px 32px" }}>
       {/* COMMITMENT TITLE */}
-      <div
+      <FlexBetween
         style={{
-          display: "flex",
-          justifyContent: "space-between",
           marginBottom: 8,
         }}
       >
@@ -23,7 +27,7 @@ const Commitment = ({ title, deadline, actionables }) => {
           </Header4>
         </div>
         <MoreVertIcon />
-      </div>
+      </FlexBetween>
 
       {/* LIST OF ACTIONABLES */}
       {actionables.map((actionable, idx) => {

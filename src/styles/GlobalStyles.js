@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from "@material-ui/core";
+import { Link, Checkbox, FormControlLabel } from "@material-ui/core";
 
 export const Colors = {
   Denim: "#2F3542",
@@ -8,6 +8,7 @@ export const Colors = {
   Cotton: "#edeef2",
 };
 
+// TYPOGRAPHY
 export const Header1 = styled.h1`
   font-weight: 900;
   font-family: "Nunito", sans-serif;
@@ -41,6 +42,7 @@ export const BodyText = styled.p`
   font-weight: 500;
   font-family: "Nunito", sans-serif;
   font-size: 0.875rem;
+  // line-height: 1.5;
   color: ${Colors.Spruce};
   margin: 0;
 `;
@@ -51,4 +53,27 @@ export const LinkText = styled(Link)`
   font-size: 0.875rem;
   color: ${Colors.Stone};
   text-decoration: underline;
+`;
+
+// CONTAINERS
+export const FlexBox = styled.div`
+  display: flex;
+`;
+
+export const FlexBetween = styled(FlexBox)`
+  justify-content: space-between;
+`;
+
+// INPUT
+export const StyledFormControlLabel = styled(FormControlLabel)`
+  margin: 0;
+  align-items: flex-start;
+`;
+
+export const StyledCheckbox = styled(Checkbox)`
+  padding: 0;
+  margin-right: 8px;
+  &&.MuiCheckbox-colorSecondary.Mui-checked {
+    color: #000;
+  }
 `;

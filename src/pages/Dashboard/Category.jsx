@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Divider } from "@material-ui/core";
 import CreateIcon from "@material-ui/icons/Create";
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
 
-import { Header1, Colors } from "../../styles/GlobalStyles";
+import { Header1, Colors, BodyText } from "../../styles/GlobalStyles";
 import Commitment from "./Commitment";
 
 const Category = ({ title, commitments }) => {
@@ -37,14 +38,23 @@ const Category = ({ title, commitments }) => {
       {commitments.map((commitment, idx) => {
         console.log("commitment", commitment);
         return (
-          <Commitment
-            key={idx}
-            title={commitment.name}
-            deadline={commitment.deadline}
-            actionables={commitment.actionables}
-          />
+          <>
+            <Commitment
+              key={idx}
+              title={commitment.name}
+              deadline={commitment.deadline}
+              actionables={commitment.actionables}
+            />
+            {idx !== commitments.length - 1 && <Divider />}
+          </>
         );
       })}
+
+      <Divider />
+
+      <BodyText style={{ textAlign: "center", padding: "24px 32px" }}>
+        + Create a new commitment
+      </BodyText>
     </div>
   );
 };
