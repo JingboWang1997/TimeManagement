@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
+import { IconButton } from "@material-ui/core";
+import CreateNewFolderIcon from "@material-ui/icons/CreateNewFolder";
 
+import { Colors } from "../../styles/GlobalStyles";
 import NavBar from "../../components/NavBar";
+import CreateCategoryDialog from "../../components/Dialogs/CreateCategoryDialog";
 import Category from "./Category";
 
 import { getCategories } from "../../service/category";
 
 const DashboardPage = () => {
   const [categories, setCategories] = useState([]);
+  const [createCategoryOpen, setCreateCategoryOpen] = useState(false);
 
   const placeholderActionables = [
     {
@@ -56,7 +61,8 @@ const DashboardPage = () => {
   return (
     <>
       <NavBar />
-      <div style={{ backgroundColor: "#F5F6FA", height: "100%", padding: 40 }}>
+
+      <div style={{ height: "100%", padding: 40 }}>
         {categories.map((category, idx) => {
           return (
             <Category
@@ -67,6 +73,33 @@ const DashboardPage = () => {
           );
         })}
       </div>
+
+      <IconButton
+        style={{
+          backgroundColor: Colors.Stone,
+          width: 72,
+          height: 72,
+          borderRadius: 50,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          position: "fixed",
+          bottom: 48,
+          right: 48,
+        }}
+        onClick={() => setCreateCategoryOpen(true)}
+      >
+        <CreateNewFolderIcon
+          onClick={() => setCreateCategoryOpen(true)}
+          style={{ color: "white" }}
+        />
+      </IconButton>
+
+      {/* DIALOGS */}
+      <CreateCategoryDialog
+        open={createCategoryOpen}
+        setOpen={setCreateCategoryOpen}
+      />
     </>
   );
 };
