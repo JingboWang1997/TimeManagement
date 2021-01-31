@@ -1,27 +1,11 @@
 import React, { useState } from "react";
-import { Checkbox, FormControlLabel, Typography } from "@material-ui/core";
+import { Checkbox, FormControlLabel } from "@material-ui/core";
 import {
   BodyText,
   Header4,
   Header4Light,
   LinkText,
 } from "../../styles/GlobalStyles";
-
-// const ActionableLabel = ({ title, duration, deadline, description, url }) => {
-//   return (
-//     <>
-//       <div style={{ display: "flex", justifyContent: "space-between" }}>
-//         <Header4>Actionable</Header4>
-//         <div style={{ display: "flex" }}>
-//           <Header4Light>30 min</Header4Light>
-//           <Header4Light>Dec 25</Header4Light>
-//         </div>
-//       </div>
-//       <BodyText>Description description</BodyText>
-//       <LinkText>Url url</LinkText>
-//     </>
-//   );
-// };
 
 const Actionable = ({ title, duration, deadline, description, url }) => {
   const [checked, setChecked] = useState(false);
@@ -33,6 +17,7 @@ const Actionable = ({ title, duration, deadline, description, url }) => {
   return (
     <div style={{ display: "flex" }}>
       <FormControlLabel
+        style={{ margin: 0, alignItems: "flex-start" }}
         control={
           <Checkbox
             checked={checked}
@@ -40,7 +25,6 @@ const Actionable = ({ title, duration, deadline, description, url }) => {
             name="actionable-check"
           />
         }
-        // label={<ActionableLabel />}
       />
       <div style={{ width: "100%" }}>
         <div
@@ -60,7 +44,9 @@ const Actionable = ({ title, duration, deadline, description, url }) => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </BodyText>
-        <LinkText>Url url</LinkText>
+        <LinkText href="https://github.com/JingboWang1997/TimeManagement">
+          Url
+        </LinkText>
       </div>
     </div>
   );

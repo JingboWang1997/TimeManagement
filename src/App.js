@@ -6,15 +6,14 @@ import CategoriesLayout from "./layouts/CategoriesLayout";
 import TopBar from "./components/TopBar";
 
 import GlobalStylesPage from "./styles/GlobalStylesPage";
-import Commitment from "./pages/Dashboard/Commitment";
-import Actionable from "./pages/Dashboard/Actionable";
+import DashboardPage from "./pages/Dashboard/DashboardPage";
 
 function App() {
   return (
     <>
       <Switch>
         <Route path="/global" component={GlobalStylesPage} />
-        <Route path="/" component={Commitment} />
+        <Route path="/" component={DashboardPage} />
       </Switch>
     </>
   );

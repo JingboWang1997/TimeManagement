@@ -1,5 +1,4 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 import { Header3, Header4, BodyText, Colors } from "../../styles/GlobalStyles";
@@ -7,7 +6,7 @@ import Actionable from "./Actionable";
 
 const Commitment = ({ title, deadline, actionables }) => {
   return (
-    <div style={{ width: 440 }}>
+    <div style={{ padding: "24px 32px" }}>
       {/* COMMITMENT TITLE */}
       <div
         style={{
@@ -29,7 +28,7 @@ const Commitment = ({ title, deadline, actionables }) => {
       <Actionable />
 
       <BodyText style={{ color: Colors.Stone, textAlign: "center" }}>
-        Create a new actionable
+        + Create a new actionable
       </BodyText>
     </div>
   );
