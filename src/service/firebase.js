@@ -1,9 +1,9 @@
 import firebase from "firebase";
 
-// import { firebaseConfig } from '../secret';
+import { firebaseConfig } from "../secret";
 
-// const firebaseApp = firebase.initializeApp(firebaseConfig);
+const firebaseApp = firebase.initializeApp(firebaseConfig);
 
-// const db = firebaseApp.firestore();
+const db = firebaseApp.firestore();
 
-// export default db;
+export default db;

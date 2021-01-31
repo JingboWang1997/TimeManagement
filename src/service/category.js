@@ -1,16 +1,16 @@
 import categoryData from "./mockData/mockdata.json";
-// import db from './firebase';
+import db from "./firebase";
 
-// const log = 'SERVICE-CATEGORY: ';
+const log = "SERVICE-CATEGORY: ";
 
-// const collectionRef = db.collection("categories");
+const collectionRef = db.collection("categories");
 
 /**
  * getMockCategories gets the mock categories data
  * @returns {Array} mock categories
  */
 export function getMockCategories() {
-  // console.log(log + 'getMockCategories');
+  console.log(log + "getMockCategories");
   return categoryData.categories;
 }
 
@@ -20,13 +20,13 @@ export function getMockCategories() {
  * @returns {Array} categories
  */
 export function getCategories(user_id) {
-  // console.log(log + 'getCategories');
-  // return collectionRef
-  //   .where("user_id", "==", user_id)
-  //   .get()
-  //   .then((querySnapshot) =>
-  //     querySnapshot.docs.map((doc) => Object.assign({ id: doc.id }, doc.data()))
-  //   );
+  console.log(log + "getCategories");
+  return collectionRef
+    .where("user_id", "==", user_id)
+    .get()
+    .then((querySnapshot) =>
+      querySnapshot.docs.map((doc) => Object.assign({ id: doc.id }, doc.data()))
+    );
 }
 
 /**
@@ -34,8 +34,8 @@ export function getCategories(user_id) {
  * @param {*} category
  */
 export function addCategory(category) {
-  // console.log(log + 'addCategory');
-  // return collectionRef.add(category);
+  console.log(log + "addCategory");
+  return collectionRef.add(category);
 }
 
 /**
@@ -43,8 +43,8 @@ export function addCategory(category) {
  * @param {String} id
  */
 export function deleteCategory(id) {
-  // console.log(log + 'deleteCategory');
-  // return collectionRef.doc(id).delete();
+  console.log(log + "deleteCategory");
+  return collectionRef.doc(id).delete();
 }
 
 /**
@@ -52,9 +52,9 @@ export function deleteCategory(id) {
  * @param {Object} category
  */
 export function editCategory(category) {
-  // console.log(log + 'editCategory');
-  // category = Object.assign({}, category);
-  // const id = category.id;
-  // delete category.id;
-  // return collectionRef.doc(id).update(category);
+  console.log(log + "editCategory");
+  category = Object.assign({}, category);
+  const id = category.id;
+  delete category.id;
+  return collectionRef.doc(id).update(category);
 }

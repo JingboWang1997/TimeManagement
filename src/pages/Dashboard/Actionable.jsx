@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { Checkbox, FormControlLabel } from "@material-ui/core";
 import {
   BodyText,
@@ -7,8 +8,15 @@ import {
   LinkText,
 } from "../../styles/GlobalStyles";
 
-const Actionable = ({ title, duration, deadline, description, url }) => {
-  const [checked, setChecked] = useState(false);
+const Actionable = ({
+  title,
+  duration,
+  deadline,
+  description,
+  url,
+  isChecked,
+}) => {
+  const [checked, setChecked] = useState(isChecked);
 
   const handleCheckChange = (e) => {
     setChecked(e.target.checked);
@@ -34,22 +42,25 @@ const Actionable = ({ title, duration, deadline, description, url }) => {
             marginBottom: 4,
           }}
         >
-          <Header4>Actionable</Header4>
+          <Header4>{title}</Header4>
           <div style={{ display: "flex" }}>
-            <Header4Light>30 min</Header4Light>
-            <Header4Light style={{ marginLeft: 38 }}>Dec 25</Header4Light>
+            <Header4Light>{duration}</Header4Light>
+            <Header4Light style={{ marginLeft: 38 }}>{deadline}</Header4Light>
           </div>
         </div>
-        <BodyText>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </BodyText>
-        <LinkText href="https://github.com/JingboWang1997/TimeManagement">
-          Url
-        </LinkText>
+        <BodyText>{description}</BodyText>
+        <LinkText href={url}>Url</LinkText>
       </div>
     </div>
   );
+};
+Actionable.propTypes = {
+  title: PropTypes.string,
+  duration: PropTypes.string,
+  deadline: PropTypes.string,
+  description: PropTypes.string,
+  url: PropTypes.string,
+  isChecked: PropTypes.bool,
 };
 
 export default Actionable;
