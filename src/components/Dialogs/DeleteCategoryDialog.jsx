@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import {
   BasicDialog,
@@ -38,6 +39,11 @@ const DeleteCategoryDialog = ({ open, setOpen, name }) => {
       </div>
     </BasicDialog>
   );
+};
+DeleteCategoryDialog.propTypes = {
+  open: PropTypes.bool,
+  setOpen: PropTypes.func,
+  name: PropTypes.string,
 };
 
 export default DeleteCategoryDialog;

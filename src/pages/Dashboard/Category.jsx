@@ -8,14 +8,22 @@ import { Header1, Colors, BodyText } from "../../styles/GlobalStyles";
 import Commitment from "./Commitment";
 import DeleteCategoryDialog from "../../components/Dialogs/DeleteCategoryDialog";
 import CreateCommitmentDialog from "../../components/Dialogs/CreateCommitmentDialog";
+import CreateCategoryDialog from "../../components/Dialogs/CreateCategoryDialog";
 
 const Category = ({ title, commitments }) => {
+  const [editCommitment, setEditCommitment] = useState(false);
   const [deleteDialog, setDeleteDialog] = useState(false);
   const [createCommitment, setCreateCommitment] = useState(false);
 
   return (
     <>
       {/* DIALOGS */}
+      <CreateCategoryDialog
+        open={editCommitment}
+        setOpen={setEditCommitment}
+        editMode
+        title={title}
+      />
       <DeleteCategoryDialog
         open={deleteDialog}
         setOpen={setDeleteDialog}
@@ -46,7 +54,10 @@ const Category = ({ title, commitments }) => {
         >
           <Header1>{title}</Header1>
           <div>
-            <CreateIcon />
+            <CreateIcon
+              onClick={() => setEditCommitment(true)}
+              style={{ cursor: "pointer" }}
+            />
             <CloseRoundedIcon
               onClick={() => setDeleteDialog(true)}
               style={{ marginLeft: 24, cursor: "pointer" }}
