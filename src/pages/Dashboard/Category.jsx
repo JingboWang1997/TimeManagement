@@ -1,20 +1,30 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Divider } from "@material-ui/core";
+import { Divider, IconButton } from "@material-ui/core";
 import CreateIcon from "@material-ui/icons/Create";
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
 
 import { Header1, Colors, BodyText } from "../../styles/GlobalStyles";
 import Commitment from "./Commitment";
 import DeleteCategoryDialog from "../../components/Dialogs/DeleteCategoryDialog";
+import CreateCommitmentDialog from "../../components/Dialogs/CreateCommitmentDialog";
 
 const Category = ({ title, commitments }) => {
   const [deleteDialog, setDeleteDialog] = useState(false);
+  const [createCommitment, setCreateCommitment] = useState(false);
 
   return (
     <>
       {/* DIALOGS */}
-      <DeleteCategoryDialog open={deleteDialog} setOpen={setDeleteDialog} />
+      <DeleteCategoryDialog
+        open={deleteDialog}
+        setOpen={setDeleteDialog}
+        name={title}
+      />
+      <CreateCommitmentDialog
+        open={createCommitment}
+        setOpen={setCreateCommitment}
+      />
 
       <div
         style={{
@@ -39,7 +49,7 @@ const Category = ({ title, commitments }) => {
             <CreateIcon />
             <CloseRoundedIcon
               onClick={() => setDeleteDialog(true)}
-              style={{ marginLeft: 24 }}
+              style={{ marginLeft: 24, cursor: "pointer" }}
             />
           </div>
         </div>
@@ -64,9 +74,17 @@ const Category = ({ title, commitments }) => {
 
         <Divider />
 
-        <BodyText style={{ textAlign: "center", padding: "24px 32px" }}>
-          + Create a new commitment
-        </BodyText>
+        <div style={{ padding: "24px 32px" }}>
+          <BodyText
+            onClick={() => setCreateCommitment(true)}
+            style={{
+              textAlign: "center",
+              cursor: "pointer",
+            }}
+          >
+            + Create a new commitment
+          </BodyText>
+        </div>
       </div>
     </>
   );

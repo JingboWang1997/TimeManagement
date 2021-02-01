@@ -9,28 +9,34 @@ import {
   Header3Light,
   BodyText,
   StyledTextValidator,
+  StyledTextField,
 } from "../../styles/GlobalStyles";
 
-const CreateCategoryDialog = ({ open, setOpen }) => {
+const CreateCommitmentDialog = ({ open, setOpen }) => {
   const formRef = useRef("form");
   const [name, setName] = useState("");
 
-  const handleSubmit = () => {
-    // api call to create category
-
+  const closeDialog = () => {
     setName("");
     setOpen(false);
+  };
+
+  const handleSubmit = () => {
+    // api call to create commitment
+
+    closeDialog();
   };
 
   return (
     <BasicDialog open={open}>
       <div style={{ padding: "24px 48px" }}>
+        {/* HEADER */}
         <Header3Light style={{ marginBottom: 8, textAlign: "center" }}>
           Create a new category
         </Header3Light>
         <BodyText>Description</BodyText>
 
-        {/* TEXTFIELD */}
+        {/* FORM */}
         <ValidatorForm onSubmit={handleSubmit} ref={formRef}>
           <StyledTextValidator
             placeholder="Enter name"
@@ -42,12 +48,23 @@ const CreateCategoryDialog = ({ open, setOpen }) => {
             style={{ marginTop: 24, marginBottom: 32, width: "100%" }}
           />
 
+          <StyledTextField
+            placeholder="Notes (optional)"
+            variant="outlined"
+            multiline
+            rows={6}
+            style={{ width: "100%" }}
+          />
+
           {/* BUTTONS */}
-          <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            <SecondaryButton
-              onClick={() => setOpen(false)}
-              style={{ marginRight: 16 }}
-            >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              marginTop: 32,
+            }}
+          >
+            <SecondaryButton onClick={closeDialog} style={{ marginRight: 16 }}>
               CANCEL
             </SecondaryButton>
             <MainButton type="submit">CREATE</MainButton>
@@ -57,9 +74,9 @@ const CreateCategoryDialog = ({ open, setOpen }) => {
     </BasicDialog>
   );
 };
-CreateCategoryDialog.propTypes = {
+CreateCommitmentDialog.propTypes = {
   open: PropTypes.bool,
   setOpen: PropTypes.func,
 };
 
-export default CreateCategoryDialog;
+export default CreateCommitmentDialog;

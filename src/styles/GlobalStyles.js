@@ -5,6 +5,8 @@ import {
   FormControlLabel,
   Dialog,
   Button,
+  TextField,
+  Select,
 } from "@material-ui/core";
 import {
   SelectValidator,
@@ -94,9 +96,11 @@ export const StyledCheckbox = styled(Checkbox)`
   padding: 0;
   margin-right: 8px;
   &&.MuiCheckbox-colorSecondary.Mui-checked {
-    color: #000;
+    color: ${Colors.Denim};
   }
 `;
+
+export const StyledTextField = styled(TextField)``;
 
 export const StyledTextValidator = styled(TextValidator)``;
 

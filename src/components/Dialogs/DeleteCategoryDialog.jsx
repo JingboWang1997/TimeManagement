@@ -6,7 +6,6 @@ import {
   SecondaryButton,
   Header3Light,
   BodyText,
-  StyledTextValidator,
 } from "../../styles/GlobalStyles";
 
 const DeleteCategoryDialog = ({ open, setOpen, name }) => {
@@ -24,7 +23,8 @@ const DeleteCategoryDialog = ({ open, setOpen, name }) => {
     <BasicDialog open={open}>
       <div style={{ padding: "24px 48px" }}>
         <Header3Light style={{ marginBottom: 8, textAlign: "center" }}>
-          Are you sure you want to delete {name}?
+          Are you sure you want to delete{" "}
+          <span style={{ fontWeight: 900 }}>{name}</span>?
         </Header3Light>
         <BodyText style={{ marginBottom: 32, textAlign: "center" }}>
           This action cannot be undone.
