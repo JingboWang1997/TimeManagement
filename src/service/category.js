@@ -3,7 +3,7 @@ import db from './firebase';
 
 // const log = 'SERVICE-CATEGORY: ';
 
-const collectionRef = db.collection('categories');
+const collectionRef = db.collection('category');
 
 /**
  * getMockCategories gets the mock categories data
