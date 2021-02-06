@@ -22,4 +22,5 @@ export const DeadlineText = styled(Header4)`
 export const CreateActionableText = styled(BodyText)`
   color: ${Colors.Stone};
   text-align: center;
+  cursor: pointer;
 `;

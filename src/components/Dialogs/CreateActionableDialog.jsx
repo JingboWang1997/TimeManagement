@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import PropTypes from "prop-types";
 import { ValidatorForm } from "react-material-ui-form-validator";
 
 import {
@@ -12,10 +11,12 @@ import {
   StyledTextField,
 } from "../../styles/GlobalStyles";
 
-const CreateCommitmentDialog = ({ open, setOpen }) => {
+const CreateActionableDialog = ({ open, setOpen }) => {
   const formRef = useRef("form");
   const [name, setName] = useState("");
-  const [notes, setNotes] = useState("");
+  const [duration, setDuration] = useState("");
+  const [description, setDescription] = useState("");
+  const [url, setUrl] = useState("");
 
   const closeDialog = () => {
     setName("");
@@ -33,7 +34,7 @@ const CreateCommitmentDialog = ({ open, setOpen }) => {
       <div style={{ padding: "24px 48px" }}>
         {/* HEADER */}
         <Header3Light style={{ marginBottom: 8, textAlign: "center" }}>
-          Create a new category
+          Create a new actionable
         </Header3Light>
         <BodyText>Description</BodyText>
 
@@ -46,17 +47,33 @@ const CreateCommitmentDialog = ({ open, setOpen }) => {
             onChange={(e) => setName(e.target.value)}
             validators={["required"]}
             errorMessages={["You must enter a name"]}
-            style={{ marginTop: 24, marginBottom: 32, width: "100%" }}
+            style={{ marginTop: 24, marginBottom: 20, width: "100%" }}
           />
 
           <StyledTextField
-            placeholder="Notes (optional)"
+            placeholder="Duration (optional)"
+            variant="outlined"
+            value={duration}
+            onChange={(e) => setDuration(e.target.value)}
+            style={{ width: "100%", marginBottom: 20 }}
+          />
+
+          <StyledTextField
+            placeholder="Description (optional)"
             variant="outlined"
             multiline
             rows={6}
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-            style={{ width: "100%" }}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            style={{ width: "100%", marginBottom: 20 }}
+          />
+
+          <StyledTextField
+            placeholder="URL (optional)"
+            variant="outlined"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            style={{ width: "100%", marginBottom: 20 }}
           />
 
           {/* BUTTONS */}
@@ -64,7 +81,6 @@ const CreateCommitmentDialog = ({ open, setOpen }) => {
             style={{
               display: "flex",
               justifyContent: "flex-end",
-              marginTop: 32,
             }}
           >
             <SecondaryButton onClick={closeDialog} style={{ marginRight: 16 }}>
@@ -77,9 +93,5 @@ const CreateCommitmentDialog = ({ open, setOpen }) => {
     </BasicDialog>
   );
 };
-CreateCommitmentDialog.propTypes = {
-  open: PropTypes.bool,
-  setOpen: PropTypes.func,
-};
 
-export default CreateCommitmentDialog;
+export default CreateActionableDialog;

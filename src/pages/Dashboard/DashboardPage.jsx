@@ -65,7 +65,7 @@ const DashboardPage = () => {
       const data = await getCategories("user_id");
 
       // testing only
-      // Object.assign(data[0], placeholderCommitments);
+      Object.assign(data[0], placeholderCommitments);
 
       console.log("data", data);
       dispatch(getCategoriesAction(data));
