@@ -9,13 +9,22 @@ import {
   BodyText,
 } from "../../styles/GlobalStyles";
 
-const DeleteCategoryDialog = ({ open, setOpen, name }) => {
+import { useDispatch } from "react-redux";
+import { deleteCategoryAction } from "../../redux/actions/categoryActions";
+import { deleteCategory } from "../../service/category";
+
+const DeleteCategoryDialog = ({ open, setOpen, name, id }) => {
+  const dispatch = useDispatch();
+
   const closeDialog = () => {
     setOpen(false);
   };
 
   const handleDelete = () => {
     // api call to delete category
+    deleteCategory(id).then(() => {
+      dispatch(deleteCategoryAction(id));
+    });
 
     closeDialog();
   };

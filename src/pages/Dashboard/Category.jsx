@@ -39,6 +39,7 @@ const Category = ({ title, id, commitments }) => {
         open={deleteDialog}
         setOpen={setDeleteDialog}
         name={title}
+        id={id}
       />
       <CreateCommitmentDialog
         open={createCommitment}

@@ -11,11 +11,10 @@ import {
   StyledTextValidator,
 } from "../../styles/GlobalStyles";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
-  addCategoryAction,
-  getCategoriesAction,
   editCategoryAction,
+  getCategoriesAction,
 } from "../../redux/actions/categoryActions";
 import {
   addCategory,
@@ -47,7 +46,9 @@ const CreateCategoryDialog = ({ open, setOpen, editMode, title, id }) => {
         user_id: "user_id", // hardcode for now
       };
       addCategory(payload).then(() => {
-        dispatch(addCategoryAction(payload));
+        getCategories("user_id").then((data) => {
+          dispatch(getCategoriesAction(data));
+        });
       });
     }
 
