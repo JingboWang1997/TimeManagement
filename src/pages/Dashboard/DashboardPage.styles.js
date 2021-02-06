@@ -7,6 +7,8 @@ import { Colors } from "../../styles/GlobalStyles";
 export const CategoriesBox = styled.div`
   height: 100%;
   padding: 40px;
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 export const MyIconButton = styled(IconButton)`

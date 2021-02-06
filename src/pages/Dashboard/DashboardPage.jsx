@@ -10,10 +10,19 @@ import NavBar from "../../components/NavBar";
 import CreateCategoryDialog from "../../components/Dialogs/CreateCategoryDialog";
 import Category from "./Category";
 
+import { useDispatch, useSelector } from "react-redux";
+import { getCategoriesAction } from "../../redux/actions/categoryActions";
 import { getCategories } from "../../service/category";
 
 const DashboardPage = () => {
-  const [categories, setCategories] = useState([]);
+  const dispatch = useDispatch();
+  const categories = useSelector((state) => state.categoryReducer.categories);
+
+  // useEffect(() => {
+  //   console.log("list", categoriesList);
+  // });
+
+  // const [categories, setCategories] = useState([]);
   const [createCategoryOpen, setCreateCategoryOpen] = useState(false);
 
   const placeholderActionables = [
@@ -56,10 +65,11 @@ const DashboardPage = () => {
       const data = await getCategories("user_id");
 
       // testing only
-      Object.assign(data[0], placeholderCommitments);
+      // Object.assign(data[0], placeholderCommitments);
 
       console.log("data", data);
-      setCategories(data);
+      dispatch(getCategoriesAction(data));
+      // setCategories(data);
     }
     fetchData();
   }, []);
@@ -71,9 +81,11 @@ const DashboardPage = () => {
       {/* CATEGORIES */}
       <CategoriesBox>
         {categories.map((category, idx) => {
+          // console.log("category", category);
           return (
             <Category
               key={idx}
+              id={category.id}
               title={category.title}
               commitments={category.commitments}
             />

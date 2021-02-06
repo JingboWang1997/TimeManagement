@@ -11,12 +11,45 @@ import {
   StyledTextValidator,
 } from "../../styles/GlobalStyles";
 
-const CreateCategoryDialog = ({ open, setOpen, editMode, title }) => {
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addCategoryAction,
+  getCategoriesAction,
+  editCategoryAction,
+} from "../../redux/actions/categoryActions";
+import {
+  addCategory,
+  editCategory,
+  getCategories,
+} from "../../service/category";
+
+const CreateCategoryDialog = ({ open, setOpen, editMode, title, id }) => {
+  const dispatch = useDispatch();
   const formRef = useRef("form");
   const [name, setName] = useState(title);
 
   const handleSubmit = () => {
-    // api call to create category
+    if (editMode) {
+      // api call to edit category
+      const payload = {
+        title: name,
+        user_id: "user_id",
+        id: id,
+      };
+      editCategory(payload).then(() => {
+        console.log("after edit category");
+        dispatch(editCategoryAction(payload));
+      });
+    } else {
+      // api call to create category
+      const payload = {
+        title: name,
+        user_id: "user_id", // hardcode for now
+      };
+      addCategory(payload).then(() => {
+        dispatch(addCategoryAction(payload));
+      });
+    }
 
     setName("");
     setOpen(false);

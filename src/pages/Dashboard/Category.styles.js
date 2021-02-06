@@ -7,9 +7,11 @@ import { Colors, BodyText } from "../../styles/GlobalStyles";
 // CONTAINERS
 export const CategoryContainer = styled.div`
   width: 440px;
+  min-width: 440px;
   background-color: white;
   border-radius: 20px;
   box-shadow: 1px 1px 4px ${Colors.Stone};
+  margin: 20px 2%;
 `;
 
 export const CategoryTitle = styled.div`

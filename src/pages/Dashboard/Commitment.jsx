@@ -26,7 +26,7 @@ const Commitment = ({ title, deadline, actionables }) => {
 
       {/* LIST OF ACTIONABLES */}
       {actionables?.map((actionable, idx) => {
-        console.log("actionable", actionable);
+        // console.log("actionable", actionable);
         return (
           <Actionable
             key={idx}

@@ -20,7 +20,7 @@ import DeleteCategoryDialog from "../../components/Dialogs/DeleteCategoryDialog"
 import CreateCommitmentDialog from "../../components/Dialogs/CreateCommitmentDialog";
 import CreateCategoryDialog from "../../components/Dialogs/CreateCategoryDialog";
 
-const Category = ({ title, commitments }) => {
+const Category = ({ title, id, commitments }) => {
   const [editCommitment, setEditCommitment] = useState(false);
   const [deleteDialog, setDeleteDialog] = useState(false);
   const [createCommitment, setCreateCommitment] = useState(false);
@@ -33,6 +33,7 @@ const Category = ({ title, commitments }) => {
         setOpen={setEditCommitment}
         editMode
         title={title}
+        id={id}
       />
       <DeleteCategoryDialog
         open={deleteDialog}
