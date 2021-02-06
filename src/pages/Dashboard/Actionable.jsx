@@ -10,6 +10,11 @@ import {
   StyledFormControlLabel,
   StyledCheckbox,
 } from "../../styles/GlobalStyles";
+import {
+  ActionableContainer,
+  DeadlineText,
+  ActionableTitleBox,
+} from "./Actionable.styles";
 
 const Actionable = ({
   title,
@@ -26,7 +31,7 @@ const Actionable = ({
   };
 
   return (
-    <FlexBox style={{ marginBottom: 16 }}>
+    <ActionableContainer>
       <StyledFormControlLabel
         control={
           <StyledCheckbox
@@ -36,24 +41,23 @@ const Actionable = ({
           />
         }
       />
+
       <div style={{ width: "100%" }}>
-        <FlexBetween
-          style={{
-            marginBottom: 4,
-          }}
-        >
+        <ActionableTitleBox>
           <Header4>{title}</Header4>
           <FlexBox>
             <Header4Light>{duration}</Header4Light>
-            <Header4Light style={{ marginLeft: 38 }}>{deadline}</Header4Light>
+            <DeadlineText>{deadline}</DeadlineText>
           </FlexBox>
-        </FlexBetween>
+        </ActionableTitleBox>
+
         <BodyText>{description}</BodyText>
         <LinkText href={url}>Link</LinkText>
       </div>
-    </FlexBox>
+    </ActionableContainer>
   );
 };
+
 Actionable.propTypes = {
   title: PropTypes.string,
   duration: PropTypes.string,

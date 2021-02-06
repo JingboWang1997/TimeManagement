@@ -2,35 +2,30 @@ import React from "react";
 import PropTypes from "prop-types";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
+import { Header3, FlexVCenter } from "../../styles/GlobalStyles";
 import {
-  Header3,
-  Header4,
-  BodyText,
-  Colors,
-  FlexBetween,
-} from "../../styles/GlobalStyles";
+  CommitmentContainer,
+  CommitmentTitleBox,
+  DeadlineText,
+  CreateActionableText,
+} from "./Commitment.styles";
+
 import Actionable from "./Actionable";
 
 const Commitment = ({ title, deadline, actionables }) => {
   return (
-    <div style={{ padding: "24px 32px" }}>
+    <CommitmentContainer>
       {/* COMMITMENT TITLE */}
-      <FlexBetween
-        style={{
-          marginBottom: 8,
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center" }}>
+      <CommitmentTitleBox>
+        <FlexVCenter>
           <Header3>{title}</Header3>
-          <Header4 style={{ marginLeft: 16, fontWeight: 500 }}>
-            ({deadline})
-          </Header4>
-        </div>
+          <DeadlineText>({deadline})</DeadlineText>
+        </FlexVCenter>
         <MoreVertIcon />
-      </FlexBetween>
+      </CommitmentTitleBox>
 
       {/* LIST OF ACTIONABLES */}
-      {actionables.map((actionable, idx) => {
+      {actionables?.map((actionable, idx) => {
         console.log("actionable", actionable);
         return (
           <Actionable
@@ -45,10 +40,9 @@ const Commitment = ({ title, deadline, actionables }) => {
         );
       })}
 
-      <BodyText style={{ color: Colors.Stone, textAlign: "center" }}>
-        + Create a new actionable
-      </BodyText>
-    </div>
+      {/* CREATE ACTIONABLE BUTTON */}
+      <CreateActionableText>+ Create a new actionable</CreateActionableText>
+    </CommitmentContainer>
   );
 };
 Commitment.propTypes = {

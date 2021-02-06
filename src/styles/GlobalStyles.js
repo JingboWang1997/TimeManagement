@@ -86,6 +86,10 @@ export const FlexBetween = styled(FlexBox)`
   justify-content: space-between;
 `;
 
+export const FlexVCenter = styled(FlexBox)`
+  align-items: center;
+`;
+
 // INPUT
 export const StyledFormControlLabel = styled(FormControlLabel)`
   margin: 0;

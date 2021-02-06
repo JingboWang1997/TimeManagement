@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { IconButton } from "@material-ui/core";
-import CreateNewFolderIcon from "@material-ui/icons/CreateNewFolder";
 
-import { Colors } from "../../styles/GlobalStyles";
+import {
+  MyIconButton,
+  CategoriesBox,
+  MyCreateNewFolderIcon,
+} from "./DashboardPage.styles";
+
 import NavBar from "../../components/NavBar";
 import CreateCategoryDialog from "../../components/Dialogs/CreateCategoryDialog";
 import Category from "./Category";
@@ -65,7 +68,8 @@ const DashboardPage = () => {
     <>
       <NavBar />
 
-      <div style={{ height: "100%", padding: 40 }}>
+      {/* CATEGORIES */}
+      <CategoriesBox>
         {categories.map((category, idx) => {
           return (
             <Category
@@ -75,28 +79,12 @@ const DashboardPage = () => {
             />
           );
         })}
-      </div>
+      </CategoriesBox>
 
-      <IconButton
-        style={{
-          backgroundColor: Colors.Stone,
-          width: 72,
-          height: 72,
-          borderRadius: 50,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          position: "fixed",
-          bottom: 48,
-          right: 48,
-        }}
-        onClick={() => setCreateCategoryOpen(true)}
-      >
-        <CreateNewFolderIcon
-          onClick={() => setCreateCategoryOpen(true)}
-          style={{ color: "white" }}
-        />
-      </IconButton>
+      {/* NEW CATEGORY BUTTON */}
+      <MyIconButton onClick={() => setCreateCategoryOpen(true)}>
+        <MyCreateNewFolderIcon onClick={() => setCreateCategoryOpen(true)} />
+      </MyIconButton>
 
       {/* DIALOGS */}
       <CreateCategoryDialog

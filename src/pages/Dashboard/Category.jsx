@@ -5,6 +5,16 @@ import CreateIcon from "@material-ui/icons/Create";
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
 
 import { Header1, Colors, BodyText } from "../../styles/GlobalStyles";
+import {
+  CategoryContainer,
+  CategoryTitle,
+  CommitmentContainer,
+  NewCommitmentBox,
+  NewCommitmentButton,
+  MyCreateIcon,
+  MyCloseRoundedIcon,
+} from "./Category.styles";
+
 import Commitment from "./Commitment";
 import DeleteCategoryDialog from "../../components/Dialogs/DeleteCategoryDialog";
 import CreateCommitmentDialog from "../../components/Dialogs/CreateCommitmentDialog";
@@ -35,41 +45,20 @@ const Category = ({ title, commitments }) => {
       />
 
       {/* CONTENT */}
-      <div
-        style={{
-          width: 440,
-          backgroundColor: "white",
-          borderRadius: 20,
-          boxShadow: `1px 1px 4px ${Colors.Stone}`,
-        }}
-      >
+      <CategoryContainer>
         {/* CATEGORY TITLE */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "24px 32px",
-            boxShadow: `0 2px ${Colors.Cotton}`,
-          }}
-        >
+        <CategoryTitle>
           <Header1>{title}</Header1>
           <div>
-            <CreateIcon
-              onClick={() => setEditCommitment(true)}
-              style={{ cursor: "pointer" }}
-            />
-            <CloseRoundedIcon
-              onClick={() => setDeleteDialog(true)}
-              style={{ marginLeft: 24, cursor: "pointer" }}
-            />
+            <MyCreateIcon onClick={() => setEditCommitment(true)} />
+            <MyCloseRoundedIcon onClick={() => setDeleteDialog(true)} />
           </div>
-        </div>
+        </CategoryTitle>
 
         {/* LIST OF COMMITMENTS */}
-        <div style={{ height: 500, overflow: "scroll" }}>
+        <CommitmentContainer>
           {commitments?.map((commitment, idx) => {
-            console.log("commitment", commitment);
+            // console.log("commitment", commitment);
             return (
               <>
                 <Commitment
@@ -82,22 +71,17 @@ const Category = ({ title, commitments }) => {
               </>
             );
           })}
-        </div>
+        </CommitmentContainer>
 
         <Divider />
 
-        <div style={{ padding: "24px 32px" }}>
-          <BodyText
-            onClick={() => setCreateCommitment(true)}
-            style={{
-              textAlign: "center",
-              cursor: "pointer",
-            }}
-          >
+        {/* CREATE NEW COMMITMENT */}
+        <NewCommitmentBox>
+          <NewCommitmentButton onClick={() => setCreateCommitment(true)}>
             + Create a new commitment
-          </BodyText>
-        </div>
-      </div>
+          </NewCommitmentButton>
+        </NewCommitmentBox>
+      </CategoryContainer>
     </>
   );
 };
