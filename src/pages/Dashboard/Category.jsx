@@ -34,6 +34,7 @@ const Category = ({ title, commitments }) => {
         setOpen={setCreateCommitment}
       />
 
+      {/* CONTENT */}
       <div
         style={{
           width: 440,
@@ -67,7 +68,7 @@ const Category = ({ title, commitments }) => {
 
         {/* LIST OF COMMITMENTS */}
         <div style={{ height: 500, overflow: "scroll" }}>
-          {commitments.map((commitment, idx) => {
+          {commitments?.map((commitment, idx) => {
             console.log("commitment", commitment);
             return (
               <>

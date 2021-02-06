@@ -51,7 +51,10 @@ const DashboardPage = () => {
   useEffect(() => {
     async function fetchData() {
       const data = await getCategories("user_id");
+
+      // testing only
       Object.assign(data[0], placeholderCommitments);
+
       console.log("data", data);
       setCategories(data);
     }
@@ -67,7 +70,7 @@ const DashboardPage = () => {
           return (
             <Category
               key={idx}
-              title={category.name}
+              title={category.title}
               commitments={category.commitments}
             />
           );
