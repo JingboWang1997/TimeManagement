@@ -19,16 +19,27 @@ import {
   StyledTextField,
 } from "../../styles/GlobalStyles";
 
+import { addCommitment } from "../../service/commitment";
+
 /**
  *
  * @param {boolean} open Whether dialog is open
  * @param {func} setOpen
  * @param {boolean} editMode Whether in edit or create mode
- * @param {string} [title] Name of the commitment
+ * @param {string} [title] Name of the commitment, only needed for editMode
  */
-const CreateCommitmentDialog = ({ open, setOpen, editMode, title }) => {
+const CreateCommitmentDialog = ({
+  open,
+  setOpen,
+  editMode,
+  title,
+  categoryId,
+}) => {
   const formRef = useRef("form");
   const [name, setName] = useState("");
+  const [selectedDate, setSelectedDate] = React.useState(
+    new Date("2014-08-18T21:11:54")
+  );
   const [notes, setNotes] = useState("");
 
   const closeDialog = () => {
@@ -36,18 +47,26 @@ const CreateCommitmentDialog = ({ open, setOpen, editMode, title }) => {
     setOpen(false);
   };
 
-  const handleSubmit = () => {
-    // api call to create commitment
-
-    closeDialog();
-  };
-
-  const [selectedDate, setSelectedDate] = React.useState(
-    new Date("2014-08-18T21:11:54")
-  );
-
   const handleDateChange = (date) => {
     setSelectedDate(date);
+  };
+
+  const handleSubmit = () => {
+    if (editMode) {
+      // api call to edit commitment
+    } else {
+      // api call to create commitment
+      const payload = {
+        category_id: categoryId,
+        title: name,
+        deadline: selectedDate,
+        notes: notes,
+      };
+      console.log("payload", payload);
+      addCommitment(payload);
+    }
+
+    closeDialog();
   };
 
   return (

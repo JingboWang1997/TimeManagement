@@ -65,9 +65,8 @@ const DashboardPage = () => {
       const data = await getCategories("user_id");
 
       // testing only
-      Object.assign(data[0], placeholderCommitments);
+      // Object.assign(data[0], placeholderCommitments);
 
-      console.log("data", data);
       dispatch(getCategoriesAction(data));
       // setCategories(data);
     }
@@ -95,7 +94,7 @@ const DashboardPage = () => {
 
       {/* NEW CATEGORY BUTTON */}
       <MyIconButton onClick={() => setCreateCategoryOpen(true)}>
-        <MyCreateNewFolderIcon onClick={() => setCreateCategoryOpen(true)} />
+        <MyCreateNewFolderIcon />
       </MyIconButton>
 
       {/* DIALOGS */}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Divider, IconButton } from "@material-ui/core";
 import CreateIcon from "@material-ui/icons/Create";
@@ -20,10 +20,19 @@ import DeleteCategoryDialog from "../../components/Dialogs/DeleteCategoryDialog"
 import CreateCommitmentDialog from "../../components/Dialogs/CreateCommitmentDialog";
 import CreateCategoryDialog from "../../components/Dialogs/CreateCategoryDialog";
 
+import { getCommitments } from "../../service/commitment";
+
 const Category = ({ title, id, commitments }) => {
   const [editCommitment, setEditCommitment] = useState(false);
   const [deleteDialog, setDeleteDialog] = useState(false);
   const [createCommitment, setCreateCommitment] = useState(false);
+
+  useEffect(() => {
+    console.log("category id", id);
+    getCommitments(id).then((res) => {
+      console.log(res);
+    });
+  });
 
   return (
     <>
@@ -44,6 +53,7 @@ const Category = ({ title, id, commitments }) => {
       <CreateCommitmentDialog
         open={createCommitment}
         setOpen={setCreateCommitment}
+        categoryId={id}
       />
 
       {/* CONTENT */}
@@ -65,6 +75,7 @@ const Category = ({ title, id, commitments }) => {
               <>
                 <Commitment
                   key={idx}
+                  categoryId={id}
                   title={commitment.name}
                   deadline={commitment.deadline}
                   actionables={commitment.actionables}

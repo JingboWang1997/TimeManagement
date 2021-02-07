@@ -14,7 +14,7 @@ export function addCategoryAction(category) {
 }
 
 export function getCategoriesAction(categories) {
-  console.log(log + "getCategories");
+  // console.log(log + "getCategories");
   return {
     type: GET_CATEGORIES,
     categories,

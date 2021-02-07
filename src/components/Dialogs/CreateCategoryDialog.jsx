@@ -36,7 +36,6 @@ const CreateCategoryDialog = ({ open, setOpen, editMode, title, id }) => {
         id: id,
       };
       editCategory(payload).then(() => {
-        console.log("after edit category");
         dispatch(editCategoryAction(payload));
       });
     } else {
