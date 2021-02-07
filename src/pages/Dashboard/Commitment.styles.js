@@ -12,6 +12,7 @@ export const CommitmentContainer = styled.div`
 
 export const CommitmentTitleBox = styled(FlexBetween)`
   margin-bottom: 8px;
+  align-items: center;
 `;
 
 export const DeadlineText = styled(Header4)`

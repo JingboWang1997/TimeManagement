@@ -10,7 +10,8 @@ import {
   CreateActionableText,
 } from "./Commitment.styles";
 
-import PopperPopupState from "../../components/Popper/CommitmentPopper";
+import CommitmentPopover from "../../components/Popover/CommitmentPopover";
+import CommitmentPopper from "../../components/Popper/CommitmentPopper";
 import Actionable from "./Actionable";
 import CreateActionableDialog from "../../components/Dialogs/CreateActionableDialog";
 
@@ -33,8 +34,7 @@ const Commitment = ({ title, deadline, actionables }) => {
             <Header3>{title}</Header3>
             <DeadlineText>({deadline})</DeadlineText>
           </FlexVCenter>
-          {/* <MoreVertIcon /> */}
-          <PopperPopupState />
+          <CommitmentPopover />
         </CommitmentTitleBox>
 
         {/* LIST OF ACTIONABLES */}
