@@ -34,7 +34,7 @@ const Commitment = ({ title, deadline, actionables }) => {
             <Header3>{title}</Header3>
             <DeadlineText>({deadline})</DeadlineText>
           </FlexVCenter>
-          <CommitmentPopover />
+          <CommitmentPopover title={title} />
         </CommitmentTitleBox>
 
         {/* LIST OF ACTIONABLES */}

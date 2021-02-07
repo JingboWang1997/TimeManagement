@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Popover, Paper } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
@@ -8,7 +8,9 @@ import {
   ActionText,
 } from "./CommitmentPopover.styles";
 
-function CommitmentPopover() {
+import CreateCommitmentDialog from "../Dialogs/CreateCommitmentDialog";
+
+function CommitmentPopover({ title }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -22,38 +24,51 @@ function CommitmentPopover() {
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
+  const [editDialog, setEditDialog] = useState(false);
+
   return (
-    <div>
-      <MyIconButton aria-describedby={id} onClick={handleClick}>
-        <MoreVertIcon />
-      </MyIconButton>
-      <Popover
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-      >
-        <Paper elevation={3}>
-          <ActionButton>
-            <ActionText>Edit</ActionText>
-          </ActionButton>
-          <ActionButton>
-            <ActionText>Delete</ActionText>
-          </ActionButton>
-          <ActionButton>
-            <ActionText>Manage Actionables</ActionText>
-          </ActionButton>
-        </Paper>
-      </Popover>
-    </div>
+    <>
+      {/* DIALOG */}
+      <CreateCommitmentDialog
+        open={editDialog}
+        setOpen={setEditDialog}
+        editMode
+        title={title}
+      />
+
+      {/* POPOVER */}
+      <div>
+        <MyIconButton aria-describedby={id} onClick={handleClick}>
+          <MoreVertIcon />
+        </MyIconButton>
+        <Popover
+          id={id}
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "right",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+        >
+          <Paper elevation={3}>
+            <ActionButton onClick={() => setEditDialog(true)}>
+              <ActionText>Edit</ActionText>
+            </ActionButton>
+            <ActionButton>
+              <ActionText>Delete</ActionText>
+            </ActionButton>
+            <ActionButton>
+              <ActionText>Manage Actionables</ActionText>
+            </ActionButton>
+          </Paper>
+        </Popover>
+      </div>
+    </>
   );
 }
 

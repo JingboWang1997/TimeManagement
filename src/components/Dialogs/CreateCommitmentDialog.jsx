@@ -12,7 +12,14 @@ import {
   StyledTextField,
 } from "../../styles/GlobalStyles";
 
-const CreateCommitmentDialog = ({ open, setOpen }) => {
+/**
+ *
+ * @param {boolean} open Whether dialog is open
+ * @param {func} setOpen
+ * @param {boolean} editMode Whether in edit or create mode
+ * @param {string} [title] Name of the commitment
+ */
+const CreateCommitmentDialog = ({ open, setOpen, editMode, title }) => {
   const formRef = useRef("form");
   const [name, setName] = useState("");
   const [notes, setNotes] = useState("");
@@ -33,7 +40,7 @@ const CreateCommitmentDialog = ({ open, setOpen }) => {
       <div style={{ padding: "24px 48px" }}>
         {/* HEADER */}
         <Header3Light style={{ marginBottom: 8, textAlign: "center" }}>
-          Create a new category
+          {editMode ? `Edit ${title}` : "Create a new commitment"}
         </Header3Light>
         <BodyText>Description</BodyText>
 
@@ -78,8 +85,10 @@ const CreateCommitmentDialog = ({ open, setOpen }) => {
   );
 };
 CreateCommitmentDialog.propTypes = {
-  open: PropTypes.bool,
-  setOpen: PropTypes.func,
+  open: PropTypes.bool.isRequired,
+  setOpen: PropTypes.func.isRequired,
+  editMode: PropTypes.bool,
+  title: PropTypes.string,
 };
 
 export default CreateCommitmentDialog;
