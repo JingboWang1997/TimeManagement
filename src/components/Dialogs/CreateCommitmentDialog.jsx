@@ -1,6 +1,13 @@
 import React, { useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { ValidatorForm } from "react-material-ui-form-validator";
+import "date-fns";
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from "@material-ui/pickers";
 
 import {
   BasicDialog,
@@ -35,6 +42,14 @@ const CreateCommitmentDialog = ({ open, setOpen, editMode, title }) => {
     closeDialog();
   };
 
+  const [selectedDate, setSelectedDate] = React.useState(
+    new Date("2014-08-18T21:11:54")
+  );
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+
   return (
     <BasicDialog open={open}>
       <div style={{ padding: "24px 48px" }}>
@@ -53,8 +68,25 @@ const CreateCommitmentDialog = ({ open, setOpen, editMode, title }) => {
             onChange={(e) => setName(e.target.value)}
             validators={["required"]}
             errorMessages={["You must enter a name"]}
-            style={{ marginTop: 24, marginBottom: 32, width: "100%" }}
+            style={{ marginTop: 24, marginBottom: 24, width: "100%" }}
           />
+
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              disableToolbar
+              variant="inline"
+              inputVariant="outlined"
+              format="MM/dd/yyyy"
+              margin="normal"
+              id="date-picker-inline"
+              value={selectedDate}
+              onChange={handleDateChange}
+              KeyboardButtonProps={{
+                "aria-label": "change date",
+              }}
+              style={{ width: "100%", marginBottom: 24, marginTop: 0 }}
+            />
+          </MuiPickersUtilsProvider>
 
           <StyledTextField
             placeholder="Notes (optional)"
