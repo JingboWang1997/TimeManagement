@@ -25,9 +25,12 @@ function categoryReducer(state = { categories: [] }, action) {
       return Object.assign({}, state);
     case EDIT_CATEGORY:
       // console.log(log + EDIT_CATEGORY);
-      state.categories = state.categories.map((c) =>
-        c.id === action.category.id ? action.category : c
-      );
+      state.categories = state.categories.map((c) => {
+        if (c.id === action.category.id) {
+          c.title = action.category.title;
+        }
+        return c;
+      });
       return Object.assign({}, state);
     default:
       // return initial state
