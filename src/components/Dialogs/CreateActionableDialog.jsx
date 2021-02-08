@@ -11,8 +11,13 @@ import {
   StyledTextField,
 } from "../../styles/GlobalStyles";
 
-const CreateActionableDialog = ({ open, setOpen }) => {
+import { useDispatch } from "react-redux";
+import { addActionable } from "../../service/actionable";
+
+const CreateActionableDialog = ({ open, setOpen, commitmentId }) => {
+  const dispatch = useDispatch();
   const formRef = useRef("form");
+
   const [name, setName] = useState("");
   const [duration, setDuration] = useState("");
   const [description, setDescription] = useState("");
@@ -24,7 +29,15 @@ const CreateActionableDialog = ({ open, setOpen }) => {
   };
 
   const handleSubmit = () => {
-    // api call to create commitment
+    // api call to create actionable
+    const payload = {
+      commitment_id: commitmentId,
+      title: name,
+      duration: duration,
+      description: description,
+      url: url,
+    };
+    addActionable(payload);
 
     closeDialog();
   };

@@ -25,7 +25,8 @@ import {
 const CreateCategoryDialog = ({ open, setOpen, editMode, title, id }) => {
   const dispatch = useDispatch();
   const formRef = useRef("form");
-  const [name, setName] = useState(title);
+
+  const [name, setName] = useState(title || "");
 
   const handleSubmit = () => {
     if (editMode) {

@@ -24,7 +24,7 @@ const Actionable = ({
   url,
   isChecked,
 }) => {
-  const [checked, setChecked] = useState(isChecked);
+  const [checked, setChecked] = useState(isChecked || false);
 
   const handleCheckChange = (e) => {
     setChecked(e.target.checked);

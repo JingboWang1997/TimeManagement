@@ -13,14 +13,12 @@ import Category from "./Category";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategoriesAction } from "../../redux/actions/categoryActions";
 import { getCategories } from "../../service/category";
+import { getCommitments } from "../../service/commitment";
+import { getActionables } from "../../service/actionable";
 
 const DashboardPage = () => {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categoryReducer.categories);
-
-  // useEffect(() => {
-  //   console.log("list", categoriesList);
-  // });
 
   // const [categories, setCategories] = useState([]);
   const [createCategoryOpen, setCreateCategoryOpen] = useState(false);
@@ -66,6 +64,29 @@ const DashboardPage = () => {
 
       // testing only
       // Object.assign(data[0], placeholderCommitments);
+
+      console.log("retrieved categories", data);
+
+      // data.forEach(async (category) => {
+      //   const commitments = await getCommitments(category.id);
+      //   console.log("commitments", commitments);
+      //   category.commitments = commitments;
+      // });
+
+      for (const category of data) {
+        const commitments = await getCommitments(category.id);
+        // console.log("commitments", commitments);
+
+        for (const commitment of commitments) {
+          const actions = await getActionables(commitment.id);
+          // console.log("actions", actions);
+          commitment.actionables = actions;
+        }
+
+        category.commitments = commitments;
+      }
+
+      console.log("final categories", data);
 
       dispatch(getCategoriesAction(data));
       // setCategories(data);

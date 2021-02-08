@@ -27,12 +27,12 @@ const Category = ({ title, id, commitments }) => {
   const [deleteDialog, setDeleteDialog] = useState(false);
   const [createCommitment, setCreateCommitment] = useState(false);
 
-  useEffect(() => {
-    console.log("category id", id);
-    getCommitments(id).then((res) => {
-      console.log(res);
-    });
-  });
+  // useEffect(() => {
+  //   console.log("category id", id);
+  //   getCommitments(id).then((res) => {
+  //     console.log(res);
+  //   });
+  // });
 
   return (
     <>
@@ -72,16 +72,17 @@ const Category = ({ title, id, commitments }) => {
           {commitments?.map((commitment, idx) => {
             // console.log("commitment", commitment);
             return (
-              <>
+              <React.Fragment key={idx}>
                 <Commitment
-                  key={idx}
                   categoryId={id}
-                  title={commitment.name}
-                  deadline={commitment.deadline}
+                  id={commitment.id}
+                  title={commitment.title}
+                  notes={commitment.notes}
+                  // deadline={commitment.deadline}
                   actionables={commitment.actionables}
                 />
                 {idx !== commitments.length - 1 && <Divider />}
-              </>
+              </React.Fragment>
             );
           })}
         </CommitmentContainer>

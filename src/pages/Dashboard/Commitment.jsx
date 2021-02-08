@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
-import { Header3, FlexVCenter } from "../../styles/GlobalStyles";
+import { Header3, FlexVCenter, Header4Light } from "../../styles/GlobalStyles";
 import {
   CommitmentContainer,
   CommitmentTitleBox,
@@ -15,7 +15,7 @@ import CommitmentPopper from "../../components/Popper/CommitmentPopper";
 import Actionable from "./Actionable";
 import CreateActionableDialog from "../../components/Dialogs/CreateActionableDialog";
 
-const Commitment = ({ title, deadline, actionables }) => {
+const Commitment = ({ id, title, deadline, notes, actionables }) => {
   const [actionableDialog, setActionableDialog] = useState(false);
 
   return (
@@ -24,6 +24,7 @@ const Commitment = ({ title, deadline, actionables }) => {
       <CreateActionableDialog
         open={actionableDialog}
         setOpen={setActionableDialog}
+        commitmentId={id}
       />
 
       {/* COMMITMENT */}
@@ -37,13 +38,15 @@ const Commitment = ({ title, deadline, actionables }) => {
           <CommitmentPopover title={title} />
         </CommitmentTitleBox>
 
+        <Header4Light>{notes}</Header4Light>
+
         {/* LIST OF ACTIONABLES */}
         {actionables?.map((actionable, idx) => {
           // console.log("actionable", actionable);
           return (
             <Actionable
               key={idx}
-              title={actionable.name}
+              title={actionable.title}
               duration={actionable.duration}
               deadline={actionable.deadline}
               description={actionable.description}
