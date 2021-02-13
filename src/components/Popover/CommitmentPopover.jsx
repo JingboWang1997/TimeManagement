@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { Popover, Paper } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
@@ -9,6 +10,7 @@ import {
 } from "./CommitmentPopover.styles";
 
 import CreateCommitmentDialog from "../Dialogs/CreateCommitmentDialog";
+import DeleteCommitmentDialog from "../Dialogs/DeleteCommitmentDialog";
 
 /**
  *
@@ -31,10 +33,11 @@ function CommitmentPopover({ title, notes, commitmentId, categoryId }) {
   const id = open ? "simple-popover" : undefined;
 
   const [editDialog, setEditDialog] = useState(false);
+  const [deleteDialog, setDeleteDialog] = useState(false);
 
   return (
     <>
-      {/* DIALOG */}
+      {/* DIALOGS */}
       <CreateCommitmentDialog
         open={editDialog}
         setOpen={setEditDialog}
@@ -43,6 +46,12 @@ function CommitmentPopover({ title, notes, commitmentId, categoryId }) {
         commitmentNotes={notes}
         id={commitmentId}
         categoryId={categoryId}
+      />
+      <DeleteCommitmentDialog
+        open={deleteDialog}
+        setOpen={setDeleteDialog}
+        name={title}
+        id={commitmentId}
       />
 
       {/* POPOVER */}
@@ -68,7 +77,7 @@ function CommitmentPopover({ title, notes, commitmentId, categoryId }) {
             <ActionButton onClick={() => setEditDialog(true)}>
               <ActionText>Edit</ActionText>
             </ActionButton>
-            <ActionButton>
+            <ActionButton onClick={() => setDeleteDialog(true)}>
               <ActionText>Delete</ActionText>
             </ActionButton>
             <ActionButton>
@@ -80,5 +89,12 @@ function CommitmentPopover({ title, notes, commitmentId, categoryId }) {
     </>
   );
 }
+
+CommitmentPopover.propTypes = {
+  title: PropTypes.string,
+  notes: PropTypes.string,
+  commitmentId: PropTypes.string,
+  categoryId: PropTypes.string,
+};
 
 export default CommitmentPopover;
