@@ -10,7 +10,13 @@ import {
 
 import CreateCommitmentDialog from "../Dialogs/CreateCommitmentDialog";
 
-function CommitmentPopover({ title }) {
+/**
+ *
+ * @param {string} categoryId - Category ID
+ * @param {string} commitmentId - Commitment ID
+ * @param {string} title - Name of commitment
+ */
+function CommitmentPopover({ title, notes, commitmentId, categoryId }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -34,6 +40,9 @@ function CommitmentPopover({ title }) {
         setOpen={setEditDialog}
         editMode
         title={title}
+        commitmentNotes={notes}
+        id={commitmentId}
+        categoryId={categoryId}
       />
 
       {/* POPOVER */}

@@ -19,7 +19,7 @@ import {
   StyledTextField,
 } from "../../styles/GlobalStyles";
 
-import { addCommitment } from "../../service/commitment";
+import { addCommitment, editCommitment } from "../../service/commitment";
 
 /**
  *
@@ -27,23 +27,33 @@ import { addCommitment } from "../../service/commitment";
  * @param {func} setOpen
  * @param {boolean} editMode Whether in edit or create mode
  * @param {string} [title] Name of the commitment, only needed for editMode
+ * @param {string} categoryId - ID of category commitment is associated with
+ * @param {string} id - Commitment ID
  */
 const CreateCommitmentDialog = ({
   open,
   setOpen,
   editMode,
   title,
+  commitmentNotes,
   categoryId,
+  id,
 }) => {
   const formRef = useRef("form");
-  const [name, setName] = useState("");
+  const [name, setName] = useState(title);
   const [selectedDate, setSelectedDate] = React.useState(
     new Date("2014-08-18T21:11:54")
   );
-  const [notes, setNotes] = useState("");
+  const [notes, setNotes] = useState(commitmentNotes);
+
+  const enterDialog = () => {
+    setName(title);
+    setNotes(commitmentNotes);
+  };
 
   const closeDialog = () => {
     setName("");
+    setNotes("");
     setOpen(false);
   };
 
@@ -54,6 +64,18 @@ const CreateCommitmentDialog = ({
   const handleSubmit = () => {
     if (editMode) {
       // api call to edit commitment
+      console.log("EDIT COMMITMENT");
+      const payload = {
+        id: id,
+        category_id: categoryId,
+        title: name,
+        deadline: selectedDate,
+        notes: notes,
+      };
+      editCommitment(payload);
+
+      // redux call
+      //
     } else {
       // api call to create commitment
       const payload = {
@@ -64,13 +86,16 @@ const CreateCommitmentDialog = ({
       };
       console.log("payload", payload);
       addCommitment(payload);
+
+      // redux call
+      //
     }
 
     closeDialog();
   };
 
   return (
-    <BasicDialog open={open}>
+    <BasicDialog open={open} onEnter={enterDialog}>
       <div style={{ padding: "24px 48px" }}>
         {/* HEADER */}
         <Header3Light style={{ marginBottom: 8, textAlign: "center" }}>
@@ -128,7 +153,9 @@ const CreateCommitmentDialog = ({
             <SecondaryButton onClick={closeDialog} style={{ marginRight: 16 }}>
               CANCEL
             </SecondaryButton>
-            <MainButton type="submit">CREATE</MainButton>
+            <MainButton type="submit">
+              {editMode ? "EDIT" : "CREATE"}
+            </MainButton>
           </div>
         </ValidatorForm>
       </div>

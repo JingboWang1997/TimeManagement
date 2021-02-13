@@ -15,7 +15,23 @@ import CommitmentPopper from "../../components/Popper/CommitmentPopper";
 import Actionable from "./Actionable";
 import CreateActionableDialog from "../../components/Dialogs/CreateActionableDialog";
 
-const Commitment = ({ id, title, deadline, notes, actionables }) => {
+/**
+ *
+ * @param {string} categoryId - Category ID
+ * @param {string} id - Commitment ID
+ * @param {string} title - Name of commitment
+ * @param {Object} deadline - Date deadline of commitment
+ * @param {string} notes - Description of commitment
+ * @param {Array} actionables - List of actionables associated with commitment
+ */
+const Commitment = ({
+  categoryId,
+  id,
+  title,
+  deadline,
+  notes,
+  actionables,
+}) => {
   const [actionableDialog, setActionableDialog] = useState(false);
 
   return (
@@ -35,7 +51,12 @@ const Commitment = ({ id, title, deadline, notes, actionables }) => {
             <Header3>{title}</Header3>
             <DeadlineText>({deadline})</DeadlineText>
           </FlexVCenter>
-          <CommitmentPopover title={title} />
+          <CommitmentPopover
+            title={title}
+            commitmentId={id}
+            categoryId={categoryId}
+            notes={notes}
+          />
         </CommitmentTitleBox>
 
         <Header4Light>{notes}</Header4Light>

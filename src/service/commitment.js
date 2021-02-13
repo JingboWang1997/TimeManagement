@@ -1,18 +1,22 @@
-import db from './firebase';
+import db from "./firebase";
 
-const log = 'SERVICE-COMMITMENT: ';
+const log = "SERVICE-COMMITMENT: ";
 
-const collectionRef = db.collection('commitment');
+const collectionRef = db.collection("commitment");
 
 /**
  * getCommitments gets all the categories for a user
- * @param {String} category_id 
+ * @param {String} category_id
  * @returns {Array} commitments
  */
 export function getCommitments(category_id) {
   // console.log(log + 'getCommitments');
-  return collectionRef.where('category_id', '==', category_id).get()
-    .then(querySnapshot => querySnapshot.docs.map(doc => Object.assign({id: doc.id}, doc.data())));
+  return collectionRef
+    .where("category_id", "==", category_id)
+    .get()
+    .then((querySnapshot) =>
+      querySnapshot.docs.map((doc) => Object.assign({ id: doc.id }, doc.data()))
+    );
 }
 
 /**
@@ -26,7 +30,7 @@ export function addCommitment(commitment) {
 
 /**
  * deleteCommitment deletes the commitment with the provided id
- * @param {String} id 
+ * @param {String} id
  */
 export function deleteCommitment(id) {
   // console.log(log + 'deleteCommitment');
@@ -35,10 +39,10 @@ export function deleteCommitment(id) {
 
 /**
  * editCommitment edits the corresponding commitment (mapped using id) with provided commitment
- * @param {Object} commitment 
+ * @param {Object} commitment
  */
 export function editCommitment(commitment) {
-  // console.log(log + 'editCommitment');
+  // console.log(log + "editCommitment");
   commitment = Object.assign({}, commitment);
   const id = commitment.id;
   delete commitment.id;
