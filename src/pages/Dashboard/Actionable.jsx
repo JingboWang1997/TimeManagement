@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import moment from "moment";
 import PropTypes from "prop-types";
 import {
   BodyText,
@@ -78,7 +79,9 @@ const Actionable = ({
             </Header4>
             <FlexBox>
               <Header4Light>{duration}</Header4Light>
-              <DeadlineText>deadline</DeadlineText>
+              <DeadlineText>
+                {moment(new Date(deadline)).format("LL")}
+              </DeadlineText>
             </FlexBox>
           </ActionableTitleBox>
 

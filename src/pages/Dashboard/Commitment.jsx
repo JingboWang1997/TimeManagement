@@ -33,13 +33,6 @@ const Commitment = ({
 }) => {
   const [actionableDialog, setActionableDialog] = useState(false);
 
-  // useEffect(() => {
-  //   console.log("deadline", deadline);
-  //   // let test = deadline.seconds * 1000;
-  //   let test = moment(new Date(deadline)).format("L");
-  //   console.log("test", test);
-  // }, [deadline]);
-
   return (
     <>
       {/* DIALOG */}
@@ -74,7 +67,6 @@ const Commitment = ({
 
         {/* LIST OF ACTIONABLES */}
         {actionables?.map((actionable, idx) => {
-          // console.log("actionable", actionable);
           return (
             <Actionable
               key={idx}

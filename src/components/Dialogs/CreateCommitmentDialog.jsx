@@ -50,9 +50,6 @@ const CreateCommitmentDialog = ({
   const formRef = useRef("form");
 
   const [name, setName] = useState("");
-  // const [selectedDate, setSelectedDate] = useState(
-  //   new Date("2014-08-18T21:11:54")
-  // );
   const [selectedDate, setSelectedDate] = useState(Date.now());
   const [notes, setNotes] = useState(commitmentNotes);
 
@@ -63,10 +60,6 @@ const CreateCommitmentDialog = ({
   };
 
   const closeDialog = () => {
-    setName("");
-    setNotes("");
-    setSelectedDate(null);
-
     setOpen(false);
   };
 
@@ -85,8 +78,6 @@ const CreateCommitmentDialog = ({
         actionables: actionables,
       };
       editCommitment(payload);
-
-      // redux call
       dispatch(editCommitmentAction(categoryId, payload));
     } else {
       const payload = {
@@ -96,7 +87,6 @@ const CreateCommitmentDialog = ({
         notes: notes,
         actionables: [],
       };
-      console.log("payload", payload);
       addCommitment(payload);
 
       // redux call
@@ -105,11 +95,6 @@ const CreateCommitmentDialog = ({
 
     closeDialog();
   };
-
-  // useEffect(() => {
-  //   console.log(typeof selectedDate);
-  //   console.log(selectedDate?.valueOf());
-  // }, [selectedDate]);
 
   return (
     <BasicDialog open={open} onEnter={enterDialog}>

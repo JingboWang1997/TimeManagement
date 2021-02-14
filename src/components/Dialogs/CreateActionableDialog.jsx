@@ -56,17 +56,13 @@ const CreateActionableDialog = ({
 
   const enterDialog = () => {
     setName(title || "");
+    setSelectedDate(deadlineInit || Date.now());
     setDuration(durationInit || "");
     setDescription(descriptionInit || "");
     setUrl(urlInit || "");
   };
 
   const closeDialog = () => {
-    setName("");
-    setDuration("");
-    setDescription("");
-    setUrl("");
-
     setOpen(false);
   };
 
@@ -82,7 +78,7 @@ const CreateActionableDialog = ({
         commitment_id: commitmentId,
         id: id,
         title: name,
-        deadline: selectedDate,
+        deadline: selectedDate?.valueOf(),
         duration: duration,
         description: description,
         url: url,
@@ -96,7 +92,7 @@ const CreateActionableDialog = ({
         category_id: categoryId,
         commitment_id: commitmentId,
         title: name,
-        deadline: selectedDate,
+        deadline: selectedDate?.valueOf(),
         duration: duration,
         description: description,
         url: url,
