@@ -4,6 +4,7 @@ import { ValidatorForm } from "react-material-ui-form-validator";
 import {
   BasicDialog,
   MainButton,
+  RedMainButton,
   SecondaryButton,
   Header3Light,
   BodyText,
@@ -12,9 +13,20 @@ import {
 } from "../../styles/GlobalStyles";
 
 import { useDispatch } from "react-redux";
-import { addActionable } from "../../service/actionable";
+import { addActionable, editActionable } from "../../service/actionable";
 
-const CreateActionableDialog = ({ open, setOpen, commitmentId }) => {
+const CreateActionableDialog = ({
+  open,
+  setOpen,
+  commitmentId,
+  id,
+  title,
+  durationInit,
+  deadlineInit,
+  descriptionInit,
+  urlInit,
+  editMode,
+}) => {
   const dispatch = useDispatch();
   const formRef = useRef("form");
 
@@ -23,31 +35,51 @@ const CreateActionableDialog = ({ open, setOpen, commitmentId }) => {
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
 
+  const enterDialog = () => {
+    setName(title);
+    setDuration(durationInit);
+    setDescription(descriptionInit);
+    setUrl(urlInit);
+  };
+
   const closeDialog = () => {
     setName("");
     setOpen(false);
   };
 
   const handleSubmit = () => {
-    // api call to create actionable
-    const payload = {
-      commitment_id: commitmentId,
-      title: name,
-      duration: duration,
-      description: description,
-      url: url,
-    };
-    addActionable(payload);
+    if (editMode) {
+      // api call to edit actionable
+      const payload = {
+        commitment_id: commitmentId,
+        id: id,
+        title: name,
+        duration: duration,
+        description: description,
+        url: url,
+      };
+      editActionable(payload);
+    } else {
+      // api call to create actionable
+      const payload = {
+        commitment_id: commitmentId,
+        title: name,
+        duration: duration,
+        description: description,
+        url: url,
+      };
+      addActionable(payload);
+    }
 
     closeDialog();
   };
 
   return (
-    <BasicDialog open={open}>
+    <BasicDialog open={open} onEnter={enterDialog}>
       <div style={{ padding: "24px 48px" }}>
         {/* HEADER */}
         <Header3Light style={{ marginBottom: 8, textAlign: "center" }}>
-          Create a new actionable
+          {editMode ? `Edit ${title}` : "Create a new actionable"}
         </Header3Light>
         <BodyText>Description</BodyText>
 
@@ -86,20 +118,28 @@ const CreateActionableDialog = ({ open, setOpen, commitmentId }) => {
             variant="outlined"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
-            style={{ width: "100%", marginBottom: 20 }}
+            style={{ width: "100%", marginBottom: 32 }}
           />
 
           {/* BUTTONS */}
           <div
             style={{
               display: "flex",
-              justifyContent: "flex-end",
+              justifyContent: "space-between",
             }}
           >
-            <SecondaryButton onClick={closeDialog} style={{ marginRight: 16 }}>
-              CANCEL
-            </SecondaryButton>
-            <MainButton type="submit">CREATE</MainButton>
+            {editMode && <RedMainButton>DELETE</RedMainButton>}
+            <div>
+              <SecondaryButton
+                onClick={closeDialog}
+                style={{ marginRight: 16 }}
+              >
+                CANCEL
+              </SecondaryButton>
+              <MainButton type="submit">
+                {editMode ? "SAVE" : "CREATE"}
+              </MainButton>
+            </div>
           </div>
         </ValidatorForm>
       </div>

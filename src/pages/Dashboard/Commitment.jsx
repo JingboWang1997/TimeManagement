@@ -67,6 +67,8 @@ const Commitment = ({
           return (
             <Actionable
               key={idx}
+              commitmentId={actionable.commitment_id}
+              id={actionable.id}
               title={actionable.title}
               duration={actionable.duration}
               deadline={actionable.deadline}

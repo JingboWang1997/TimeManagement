@@ -16,7 +16,11 @@ import {
   ActionableTitleBox,
 } from "./Actionable.styles";
 
+import CreateActionableDialog from "../../components/Dialogs/CreateActionableDialog";
+
 const Actionable = ({
+  commitmentId,
+  id,
   title,
   duration,
   deadline,
@@ -25,36 +29,59 @@ const Actionable = ({
   isChecked,
 }) => {
   const [checked, setChecked] = useState(isChecked || false);
+  const [editDialog, setEditDialog] = useState(false);
 
   const handleCheckChange = (e) => {
     setChecked(e.target.checked);
   };
 
   return (
-    <ActionableContainer>
-      <StyledFormControlLabel
-        control={
-          <StyledCheckbox
-            checked={checked}
-            onChange={handleCheckChange}
-            name="actionable-check"
-          />
-        }
+    <>
+      {/* DIALOG */}
+      <CreateActionableDialog
+        open={editDialog}
+        setOpen={setEditDialog}
+        commitmentId={commitmentId}
+        id={id}
+        title={title}
+        durationInit={duration}
+        deadlineInit={deadline}
+        descriptionInit={description}
+        urlInit={url}
+        editMode
       />
 
-      <div style={{ width: "100%" }}>
-        <ActionableTitleBox>
-          <Header4>{title}</Header4>
-          <FlexBox>
-            <Header4Light>{duration}</Header4Light>
-            <DeadlineText>{deadline}</DeadlineText>
-          </FlexBox>
-        </ActionableTitleBox>
+      {/* ACTIONABLE */}
+      <ActionableContainer>
+        <StyledFormControlLabel
+          control={
+            <StyledCheckbox
+              checked={checked}
+              onChange={handleCheckChange}
+              name="actionable-check"
+            />
+          }
+        />
 
-        <BodyText>{description}</BodyText>
-        <LinkText href={url}>Link</LinkText>
-      </div>
-    </ActionableContainer>
+        <div style={{ width: "100%" }}>
+          <ActionableTitleBox>
+            <Header4
+              onClick={() => setEditDialog(true)}
+              style={{ cursor: "pointer" }}
+            >
+              {title}
+            </Header4>
+            <FlexBox>
+              <Header4Light>{duration}</Header4Light>
+              <DeadlineText>{deadline}</DeadlineText>
+            </FlexBox>
+          </ActionableTitleBox>
+
+          <BodyText>{description}</BodyText>
+          <LinkText href={url}>Link</LinkText>
+        </div>
+      </ActionableContainer>
+    </>
   );
 };
 

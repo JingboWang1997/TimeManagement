@@ -121,6 +121,10 @@ export const MainButton = styled(Button)`
   padding: 0px 16px;
 `;
 
+export const RedMainButton = styled(MainButton)`
+  background: linear-gradient(75deg, #d63333, #ea4545);
+`;
+
 export const SecondaryButton = styled(MainButton)`
   background: white;
   color: ${Colors.Cobalt};
