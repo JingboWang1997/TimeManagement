@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { ValidatorForm } from "react-material-ui-form-validator";
 import "date-fns";
@@ -41,6 +41,7 @@ const CreateCommitmentDialog = ({
   editMode,
   title,
   commitmentNotes,
+  deadline,
   categoryId,
   id,
   actionables,
@@ -49,19 +50,23 @@ const CreateCommitmentDialog = ({
   const formRef = useRef("form");
 
   const [name, setName] = useState("");
-  const [selectedDate, setSelectedDate] = React.useState(
-    new Date("2014-08-18T21:11:54")
-  );
+  // const [selectedDate, setSelectedDate] = useState(
+  //   new Date("2014-08-18T21:11:54")
+  // );
+  const [selectedDate, setSelectedDate] = useState(Date.now());
   const [notes, setNotes] = useState(commitmentNotes);
 
   const enterDialog = () => {
     setName(title || "");
     setNotes(commitmentNotes || "");
+    setSelectedDate(deadline || Date.now());
   };
 
   const closeDialog = () => {
     setName("");
     setNotes("");
+    setSelectedDate(null);
+
     setOpen(false);
   };
 
@@ -75,7 +80,7 @@ const CreateCommitmentDialog = ({
         id: id,
         category_id: categoryId,
         title: name,
-        deadline: selectedDate,
+        deadline: selectedDate?.valueOf(),
         notes: notes,
         actionables: actionables,
       };
@@ -87,7 +92,7 @@ const CreateCommitmentDialog = ({
       const payload = {
         category_id: categoryId,
         title: name,
-        deadline: selectedDate,
+        deadline: selectedDate?.valueOf(),
         notes: notes,
         actionables: [],
       };
@@ -100,6 +105,11 @@ const CreateCommitmentDialog = ({
 
     closeDialog();
   };
+
+  // useEffect(() => {
+  //   console.log(typeof selectedDate);
+  //   console.log(selectedDate?.valueOf());
+  // }, [selectedDate]);
 
   return (
     <BasicDialog open={open} onEnter={enterDialog}>

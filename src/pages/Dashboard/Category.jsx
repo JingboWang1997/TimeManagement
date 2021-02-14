@@ -74,7 +74,7 @@ const Category = ({ title, id, commitments }) => {
                   id={commitment.id}
                   title={commitment.title}
                   notes={commitment.notes}
-                  // deadline={commitment.deadline}
+                  deadline={commitment.deadline}
                   actionables={commitment.actionables}
                 />
                 {idx !== commitments.length - 1 && <Divider />}

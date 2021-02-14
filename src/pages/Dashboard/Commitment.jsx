@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import moment from "moment";
 import PropTypes from "prop-types";
 
 import { Header3, FlexVCenter, Header4Light } from "../../styles/GlobalStyles";
@@ -32,6 +33,13 @@ const Commitment = ({
 }) => {
   const [actionableDialog, setActionableDialog] = useState(false);
 
+  // useEffect(() => {
+  //   console.log("deadline", deadline);
+  //   // let test = deadline.seconds * 1000;
+  //   let test = moment(new Date(deadline)).format("L");
+  //   console.log("test", test);
+  // }, [deadline]);
+
   return (
     <>
       {/* DIALOG */}
@@ -48,10 +56,13 @@ const Commitment = ({
         <CommitmentTitleBox>
           <FlexVCenter>
             <Header3>{title}</Header3>
-            <DeadlineText>({deadline})</DeadlineText>
+            <DeadlineText>
+              ({moment(new Date(deadline)).format("LL")})
+            </DeadlineText>
           </FlexVCenter>
           <CommitmentPopover
             title={title}
+            deadline={deadline}
             commitmentId={id}
             categoryId={categoryId}
             notes={notes}

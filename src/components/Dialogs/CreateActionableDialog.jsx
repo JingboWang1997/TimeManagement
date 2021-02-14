@@ -1,6 +1,13 @@
 import React, { useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { ValidatorForm } from "react-material-ui-form-validator";
+import "date-fns";
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from "@material-ui/pickers";
 
 import {
   BasicDialog,
@@ -40,6 +47,7 @@ const CreateActionableDialog = ({
 
   // form states
   const [name, setName] = useState("");
+  const [selectedDate, setSelectedDate] = useState(Date.now());
   const [duration, setDuration] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
@@ -58,7 +66,12 @@ const CreateActionableDialog = ({
     setDuration("");
     setDescription("");
     setUrl("");
+
     setOpen(false);
+  };
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
   };
 
   const handleSubmit = () => {
@@ -69,6 +82,7 @@ const CreateActionableDialog = ({
         commitment_id: commitmentId,
         id: id,
         title: name,
+        deadline: selectedDate,
         duration: duration,
         description: description,
         url: url,
@@ -82,6 +96,7 @@ const CreateActionableDialog = ({
         category_id: categoryId,
         commitment_id: commitmentId,
         title: name,
+        deadline: selectedDate,
         duration: duration,
         description: description,
         url: url,
@@ -125,6 +140,23 @@ const CreateActionableDialog = ({
               errorMessages={["You must enter a name"]}
               style={{ marginTop: 24, marginBottom: 20, width: "100%" }}
             />
+
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardDatePicker
+                disableToolbar
+                variant="inline"
+                inputVariant="outlined"
+                format="MM/dd/yyyy"
+                margin="normal"
+                id="date-picker-inline"
+                value={selectedDate}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  "aria-label": "change date",
+                }}
+                style={{ width: "100%", marginBottom: 24, marginTop: 0 }}
+              />
+            </MuiPickersUtilsProvider>
 
             <StyledTextField
               placeholder="Duration (optional)"

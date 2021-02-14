@@ -21,6 +21,7 @@ import DeleteDialog from "../Dialogs/DeleteDialog";
 function CommitmentPopover({
   title,
   notes,
+  deadline,
   commitmentId,
   categoryId,
   actionables,
@@ -49,6 +50,7 @@ function CommitmentPopover({
         setOpen={setEditDialog}
         editMode
         title={title}
+        deadline={deadline}
         commitmentNotes={notes}
         id={commitmentId}
         categoryId={categoryId}

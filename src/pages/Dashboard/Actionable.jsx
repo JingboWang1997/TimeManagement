@@ -78,7 +78,7 @@ const Actionable = ({
             </Header4>
             <FlexBox>
               <Header4Light>{duration}</Header4Light>
-              <DeadlineText>{deadline}</DeadlineText>
+              <DeadlineText>deadline</DeadlineText>
             </FlexBox>
           </ActionableTitleBox>
 
