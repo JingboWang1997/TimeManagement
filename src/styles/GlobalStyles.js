@@ -104,11 +104,17 @@ export const StyledCheckbox = styled(Checkbox)`
   }
 `;
 
-export const StyledTextField = styled(TextField)``;
+export const StyledTextField = styled(TextField)`
+  width: 100%;
+`;
 
-export const StyledTextValidator = styled(TextValidator)``;
+export const StyledTextValidator = styled(TextValidator)`
+  width: 100%;
+`;
 
-export const StyledSelectValidator = styled(SelectValidator)``;
+export const StyledSelectValidator = styled(SelectValidator)`
+  width: 100%;
+`;
 
 export const MainButton = styled(Button)`
   background: linear-gradient(75deg, ${Colors.Navy}, ${Colors.Cobalt});
