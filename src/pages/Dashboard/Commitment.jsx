@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 import { Header3, FlexVCenter, Header4Light } from "../../styles/GlobalStyles";
 import {
@@ -11,7 +10,6 @@ import {
 } from "./Commitment.styles";
 
 import CommitmentPopover from "../../components/Popover/CommitmentPopover";
-import CommitmentPopper from "../../components/Popper/CommitmentPopper";
 import Actionable from "./Actionable";
 import CreateActionableDialog from "../../components/Dialogs/CreateActionableDialog";
 
@@ -41,6 +39,7 @@ const Commitment = ({
         open={actionableDialog}
         setOpen={setActionableDialog}
         commitmentId={id}
+        categoryId={categoryId}
       />
 
       {/* COMMITMENT */}
@@ -68,6 +67,7 @@ const Commitment = ({
           return (
             <Actionable
               key={idx}
+              categoryId={actionable.category_id}
               commitmentId={actionable.commitment_id}
               id={actionable.id}
               title={actionable.title}
@@ -88,6 +88,7 @@ const Commitment = ({
     </>
   );
 };
+
 Commitment.propTypes = {
   title: PropTypes.string,
   deadline: PropTypes.string,

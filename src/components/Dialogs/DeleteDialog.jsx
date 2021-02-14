@@ -12,6 +12,7 @@ import {
 import { useDispatch } from "react-redux";
 import { deleteCategoryAction } from "../../redux/actions/categoryActions";
 import { deleteCommitmentAction } from "../../redux/actions/commitmentActions";
+import { deleteActionableAction } from "../../redux/actions/actionableActions";
 import { deleteCategory } from "../../service/category";
 import { deleteCommitment } from "../../service/commitment";
 import { deleteActionable } from "../../service/actionable";
@@ -41,19 +42,16 @@ const DeleteDialog = ({
 
   const handleDelete = () => {
     if (type === "category") {
-      console.log("DELETE CATEGORY");
       deleteCategory(id).then(() => {
         dispatch(deleteCategoryAction(id));
       });
     } else if (type === "commitment") {
-      console.log("DELETE COMMITMENT");
       deleteCommitment(id).then(() => {
         dispatch(deleteCommitmentAction(categoryId, id));
       });
     } else if (type === "actionable") {
-      console.log("DELETE ACTIONABLE");
       deleteActionable(id).then(() => {
-        //
+        dispatch(deleteActionableAction(categoryId, commitmentId, id));
       });
     }
 

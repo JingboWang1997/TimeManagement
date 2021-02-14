@@ -10,11 +10,18 @@ import {
   DELETE_COMMITMENT,
   EDIT_COMMITMENT,
 } from "../actions/commitmentActions";
+import {
+  ADD_ACTIONABLE,
+  GET_ACTIONABLES,
+  DELETE_ACTIONABLE,
+  EDIT_ACTIONABLE,
+} from "../actions/actionableActions";
 
 const log = "CATEGORY-REDUCER: ";
 
 function categoryReducer(state = { categories: [] }, action) {
   switch (action.type) {
+    // CATEGORIES
     case ADD_CATEGORY:
       // console.log(log + ADD_CATEGORY);
       return Object.assign({}, state, {
@@ -39,6 +46,7 @@ function categoryReducer(state = { categories: [] }, action) {
       });
       return Object.assign({}, state);
 
+    // COMMITMENTS
     case ADD_COMMITMENT:
       for (const category in state.categories) {
         console.log(action.commitment);
@@ -66,6 +74,23 @@ function categoryReducer(state = { categories: [] }, action) {
           );
         }
         return c;
+      });
+      return Object.assign({}, state);
+
+    // ACTIONABLES
+    case DELETE_ACTIONABLE:
+      state.categories = state.categories.map((category) => {
+        if (category.id === action.categoryId) {
+          category.commitments = category.commitments.map((commitment) => {
+            if (commitment.id === action.commitmentId) {
+              commitment.actionables = commitment.actionables.filter(
+                (actionable) => actionable.id !== action.id
+              );
+            }
+            return commitment;
+          });
+        }
+        return category;
       });
       return Object.assign({}, state);
 

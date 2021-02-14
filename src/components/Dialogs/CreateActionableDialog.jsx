@@ -21,6 +21,7 @@ import { addActionable, editActionable } from "../../service/actionable";
 const CreateActionableDialog = ({
   open,
   setOpen,
+  categoryId,
   commitmentId,
   id,
   title,
@@ -60,6 +61,7 @@ const CreateActionableDialog = ({
     if (editMode) {
       // api call to edit actionable
       const payload = {
+        category_id: categoryId,
         commitment_id: commitmentId,
         id: id,
         title: name,
@@ -71,6 +73,7 @@ const CreateActionableDialog = ({
     } else {
       // api call to create actionable
       const payload = {
+        category_id: categoryId,
         commitment_id: commitmentId,
         title: name,
         duration: duration,
@@ -91,6 +94,8 @@ const CreateActionableDialog = ({
         setOpen={setDeleteDialog}
         name={title}
         id={id}
+        categoryId={categoryId}
+        commitmentId={commitmentId}
         type="actionable"
       />
 

@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Divider, IconButton } from "@material-ui/core";
-import CreateIcon from "@material-ui/icons/Create";
-import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
+import { Divider } from "@material-ui/core";
 
-import { Header1, Colors, BodyText } from "../../styles/GlobalStyles";
+import { Header1 } from "../../styles/GlobalStyles";
 import {
   CategoryContainer,
   CategoryTitle,
@@ -20,19 +18,17 @@ import CreateCommitmentDialog from "../../components/Dialogs/CreateCommitmentDia
 import CreateCategoryDialog from "../../components/Dialogs/CreateCategoryDialog";
 import DeleteDialog from "../../components/Dialogs/DeleteDialog";
 
-import { getCommitments } from "../../service/commitment";
-
+/**
+ *
+ * @param {string} title - Name of category
+ * @param {string} id - Category ID
+ * @param {Array} commitments - List of commitments in category
+ */
 const Category = ({ title, id, commitments }) => {
+  // dialog setters
   const [editCommitment, setEditCommitment] = useState(false);
   const [deleteDialog, setDeleteDialog] = useState(false);
   const [createCommitment, setCreateCommitment] = useState(false);
-
-  // useEffect(() => {
-  //   console.log("category id", id);
-  //   getCommitments(id).then((res) => {
-  //     console.log(res);
-  //   });
-  // });
 
   return (
     <>
@@ -71,7 +67,6 @@ const Category = ({ title, id, commitments }) => {
         {/* LIST OF COMMITMENTS */}
         <CommitmentContainer>
           {commitments?.map((commitment, idx) => {
-            // console.log("commitment", commitment);
             return (
               <React.Fragment key={idx}>
                 <Commitment
@@ -102,6 +97,7 @@ const Category = ({ title, id, commitments }) => {
 };
 Category.propTypes = {
   title: PropTypes.string,
+  id: PropTypes.string,
   commitments: PropTypes.array,
 };
 

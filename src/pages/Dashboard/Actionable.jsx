@@ -19,6 +19,7 @@ import {
 import CreateActionableDialog from "../../components/Dialogs/CreateActionableDialog";
 
 const Actionable = ({
+  categoryId,
   commitmentId,
   id,
   title,
@@ -41,6 +42,7 @@ const Actionable = ({
       <CreateActionableDialog
         open={editDialog}
         setOpen={setEditDialog}
+        categoryId={categoryId}
         commitmentId={commitmentId}
         id={id}
         title={title}
