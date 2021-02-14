@@ -20,6 +20,7 @@ import {
 } from "../../styles/GlobalStyles";
 
 import { addCommitment, editCommitment } from "../../service/commitment";
+import { addCommitmentAction } from "../../redux/actions/commitmentActions";
 
 /**
  *
@@ -40,15 +41,15 @@ const CreateCommitmentDialog = ({
   id,
 }) => {
   const formRef = useRef("form");
-  const [name, setName] = useState(title);
+  const [name, setName] = useState("");
   const [selectedDate, setSelectedDate] = React.useState(
     new Date("2014-08-18T21:11:54")
   );
   const [notes, setNotes] = useState(commitmentNotes);
 
   const enterDialog = () => {
-    setName(title);
-    setNotes(commitmentNotes);
+    setName(title || "");
+    setNotes(commitmentNotes || "");
   };
 
   const closeDialog = () => {
@@ -63,8 +64,6 @@ const CreateCommitmentDialog = ({
 
   const handleSubmit = () => {
     if (editMode) {
-      // api call to edit commitment
-      console.log("EDIT COMMITMENT");
       const payload = {
         id: id,
         category_id: categoryId,
@@ -77,7 +76,6 @@ const CreateCommitmentDialog = ({
       // redux call
       //
     } else {
-      // api call to create commitment
       const payload = {
         category_id: categoryId,
         title: name,

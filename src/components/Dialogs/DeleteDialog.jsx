@@ -11,6 +11,7 @@ import {
 
 import { useDispatch } from "react-redux";
 import { deleteCategoryAction } from "../../redux/actions/categoryActions";
+import { deleteCommitmentAction } from "../../redux/actions/commitmentActions";
 import { deleteCategory } from "../../service/category";
 import { deleteCommitment } from "../../service/commitment";
 import { deleteActionable } from "../../service/actionable";
@@ -23,7 +24,15 @@ import { deleteActionable } from "../../service/actionable";
  * @param {string} id - ID of category/commitment/actionable
  * @param {string} type - "category", "commitment", "actionable"
  */
-const DeleteDialog = ({ open, setOpen, name, id, type }) => {
+const DeleteDialog = ({
+  open,
+  setOpen,
+  name,
+  id,
+  type,
+  categoryId,
+  commitmentId,
+}) => {
   const dispatch = useDispatch();
 
   const closeDialog = () => {
@@ -39,7 +48,7 @@ const DeleteDialog = ({ open, setOpen, name, id, type }) => {
     } else if (type === "commitment") {
       console.log("DELETE COMMITMENT");
       deleteCommitment(id).then(() => {
-        //
+        dispatch(deleteCommitmentAction(categoryId, id));
       });
     } else if (type === "actionable") {
       console.log("DELETE ACTIONABLE");

@@ -52,6 +52,7 @@ function CommitmentPopover({ title, notes, commitmentId, categoryId }) {
         setOpen={setDeleteDialog}
         name={title}
         id={commitmentId}
+        categoryId={categoryId}
         type="commitment"
       />
 

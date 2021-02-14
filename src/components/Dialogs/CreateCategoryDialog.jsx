@@ -45,7 +45,7 @@ const CreateCategoryDialog = ({ open, setOpen, editMode, title, id }) => {
         title: name,
         user_id: "user_id", // hardcode for now
       };
-      addCategory(payload).then(() => {
+      addCategory(payload).then((res) => {
         getCategories("user_id").then((data) => {
           dispatch(getCategoriesAction(data));
         });

@@ -4,8 +4,14 @@ import {
   DELETE_CATEGORY,
   EDIT_CATEGORY,
 } from "../actions/categoryActions";
+import {
+  ADD_COMMITMENT,
+  GET_COMMITMENTS,
+  DELETE_COMMITMENT,
+  EDIT_COMMITMENT,
+} from "../actions/commitmentActions";
 
-// const log = 'CATEGORY-REDUCER: ';
+const log = "CATEGORY-REDUCER: ";
 
 function categoryReducer(state = { categories: [] }, action) {
   switch (action.type) {
@@ -32,6 +38,23 @@ function categoryReducer(state = { categories: [] }, action) {
         return c;
       });
       return Object.assign({}, state);
+
+    case ADD_COMMITMENT:
+      for (const category in state.categories) {
+        console.log(action.commitment);
+        // if (category.id === action.commitment)
+      }
+    case DELETE_COMMITMENT:
+      state.categories = state.categories.map((c) => {
+        if (c.id == action.categoryId) {
+          c.commitments = c.commitments.filter(
+            (commitment) => commitment.id !== action.id
+          );
+        }
+        return c;
+      });
+      return Object.assign({}, state);
+
     default:
       // return initial state
       // console.log(log + 'default');
