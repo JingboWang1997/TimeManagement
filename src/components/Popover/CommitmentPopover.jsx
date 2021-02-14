@@ -10,7 +10,7 @@ import {
 } from "./CommitmentPopover.styles";
 
 import CreateCommitmentDialog from "../Dialogs/CreateCommitmentDialog";
-import DeleteCommitmentDialog from "../Dialogs/DeleteCommitmentDialog";
+import DeleteDialog from "../Dialogs/DeleteDialog";
 
 /**
  *
@@ -47,11 +47,12 @@ function CommitmentPopover({ title, notes, commitmentId, categoryId }) {
         id={commitmentId}
         categoryId={categoryId}
       />
-      <DeleteCommitmentDialog
+      <DeleteDialog
         open={deleteDialog}
         setOpen={setDeleteDialog}
         name={title}
         id={commitmentId}
+        type="commitment"
       />
 
       {/* POPOVER */}

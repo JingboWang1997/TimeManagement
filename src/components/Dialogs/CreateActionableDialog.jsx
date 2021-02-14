@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import PropTypes from "prop-types";
 import { ValidatorForm } from "react-material-ui-form-validator";
 
 import {
@@ -11,6 +12,8 @@ import {
   StyledTextValidator,
   StyledTextField,
 } from "../../styles/GlobalStyles";
+
+import DeleteDialog from "../Dialogs/DeleteDialog";
 
 import { useDispatch } from "react-redux";
 import { addActionable, editActionable } from "../../service/actionable";
@@ -30,10 +33,13 @@ const CreateActionableDialog = ({
   const dispatch = useDispatch();
   const formRef = useRef("form");
 
+  // form states
   const [name, setName] = useState("");
   const [duration, setDuration] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
+
+  const [deleteDialog, setDeleteDialog] = useState(false);
 
   const enterDialog = () => {
     setName(title);
@@ -75,76 +81,105 @@ const CreateActionableDialog = ({
   };
 
   return (
-    <BasicDialog open={open} onEnter={enterDialog}>
-      <div style={{ padding: "24px 48px" }}>
-        {/* HEADER */}
-        <Header3Light style={{ marginBottom: 8, textAlign: "center" }}>
-          {editMode ? `Edit ${title}` : "Create a new actionable"}
-        </Header3Light>
-        <BodyText>Description</BodyText>
+    <>
+      {/* DIALOG */}
+      <DeleteDialog
+        open={deleteDialog}
+        setOpen={setDeleteDialog}
+        name={title}
+        id={id}
+        type="actionable"
+      />
 
-        {/* FORM */}
-        <ValidatorForm onSubmit={handleSubmit} ref={formRef}>
-          <StyledTextValidator
-            placeholder="Name"
-            variant="outlined"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            validators={["required"]}
-            errorMessages={["You must enter a name"]}
-            style={{ marginTop: 24, marginBottom: 20, width: "100%" }}
-          />
+      {/* MAIN CONTENT */}
+      <BasicDialog open={open} onEnter={enterDialog}>
+        <div style={{ padding: "24px 48px" }}>
+          {/* HEADER */}
+          <Header3Light style={{ marginBottom: 8, textAlign: "center" }}>
+            {editMode ? `Edit ${title}` : "Create a new actionable"}
+          </Header3Light>
+          <BodyText>Description</BodyText>
 
-          <StyledTextField
-            placeholder="Duration (optional)"
-            variant="outlined"
-            value={duration}
-            onChange={(e) => setDuration(e.target.value)}
-            style={{ width: "100%", marginBottom: 20 }}
-          />
+          {/* FORM */}
+          <ValidatorForm onSubmit={handleSubmit} ref={formRef}>
+            <StyledTextValidator
+              placeholder="Name"
+              variant="outlined"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              validators={["required"]}
+              errorMessages={["You must enter a name"]}
+              style={{ marginTop: 24, marginBottom: 20, width: "100%" }}
+            />
 
-          <StyledTextField
-            placeholder="Description (optional)"
-            variant="outlined"
-            multiline
-            rows={6}
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            style={{ width: "100%", marginBottom: 20 }}
-          />
+            <StyledTextField
+              placeholder="Duration (optional)"
+              variant="outlined"
+              value={duration}
+              onChange={(e) => setDuration(e.target.value)}
+              style={{ width: "100%", marginBottom: 20 }}
+            />
 
-          <StyledTextField
-            placeholder="URL (optional)"
-            variant="outlined"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            style={{ width: "100%", marginBottom: 32 }}
-          />
+            <StyledTextField
+              placeholder="Description (optional)"
+              variant="outlined"
+              multiline
+              rows={6}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              style={{ width: "100%", marginBottom: 20 }}
+            />
 
-          {/* BUTTONS */}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            {editMode && <RedMainButton>DELETE</RedMainButton>}
-            <div>
-              <SecondaryButton
-                onClick={closeDialog}
-                style={{ marginRight: 16 }}
-              >
-                CANCEL
-              </SecondaryButton>
-              <MainButton type="submit">
-                {editMode ? "SAVE" : "CREATE"}
-              </MainButton>
+            <StyledTextField
+              placeholder="URL (optional)"
+              variant="outlined"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              style={{ width: "100%", marginBottom: 32 }}
+            />
+
+            {/* BUTTONS */}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              {editMode && (
+                <RedMainButton onClick={() => setDeleteDialog(true)}>
+                  DELETE
+                </RedMainButton>
+              )}
+              <div>
+                <SecondaryButton
+                  onClick={closeDialog}
+                  style={{ marginRight: 16 }}
+                >
+                  CANCEL
+                </SecondaryButton>
+                <MainButton type="submit">
+                  {editMode ? "SAVE" : "CREATE"}
+                </MainButton>
+              </div>
             </div>
-          </div>
-        </ValidatorForm>
-      </div>
-    </BasicDialog>
+          </ValidatorForm>
+        </div>
+      </BasicDialog>
+    </>
   );
+};
+
+CreateActionableDialog.propTypes = {
+  open: PropTypes.bool,
+  setOpen: PropTypes.func,
+  commitmentId: PropTypes.string,
+  id: PropTypes.string,
+  title: PropTypes.string,
+  durationInit: PropTypes.string,
+  // deadlineInit,
+  descriptionInit: PropTypes.string,
+  urlInit: PropTypes.string,
+  editMode: PropTypes.bool,
 };
 
 export default CreateActionableDialog;

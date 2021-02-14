@@ -12,8 +12,18 @@ import {
 import { useDispatch } from "react-redux";
 import { deleteCategoryAction } from "../../redux/actions/categoryActions";
 import { deleteCategory } from "../../service/category";
+import { deleteCommitment } from "../../service/commitment";
+import { deleteActionable } from "../../service/actionable";
 
-const DeleteCategoryDialog = ({ open, setOpen, name, id }) => {
+/**
+ *
+ * @param {boolean} open - Whether dialog is open
+ * @param {function} setOpen - Set whether dialog is open
+ * @param {string} name - Name of category/commitment/actionable
+ * @param {string} id - ID of category/commitment/actionable
+ * @param {string} type - "category", "commitment", "actionable"
+ */
+const DeleteDialog = ({ open, setOpen, name, id, type }) => {
   const dispatch = useDispatch();
 
   const closeDialog = () => {
@@ -21,10 +31,22 @@ const DeleteCategoryDialog = ({ open, setOpen, name, id }) => {
   };
 
   const handleDelete = () => {
-    // api call to delete category
-    deleteCategory(id).then(() => {
-      dispatch(deleteCategoryAction(id));
-    });
+    if (type === "category") {
+      console.log("DELETE CATEGORY");
+      deleteCategory(id).then(() => {
+        dispatch(deleteCategoryAction(id));
+      });
+    } else if (type === "commitment") {
+      console.log("DELETE COMMITMENT");
+      deleteCommitment(id).then(() => {
+        //
+      });
+    } else if (type === "actionable") {
+      console.log("DELETE ACTIONABLE");
+      deleteActionable(id).then(() => {
+        //
+      });
+    }
 
     closeDialog();
   };
@@ -49,10 +71,13 @@ const DeleteCategoryDialog = ({ open, setOpen, name, id }) => {
     </BasicDialog>
   );
 };
-DeleteCategoryDialog.propTypes = {
+
+DeleteDialog.propTypes = {
   open: PropTypes.bool,
   setOpen: PropTypes.func,
   name: PropTypes.string,
+  id: PropTypes.string,
+  type: PropTypes.string,
 };
 
-export default DeleteCategoryDialog;
+export default DeleteDialog;

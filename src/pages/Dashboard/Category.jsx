@@ -16,9 +16,9 @@ import {
 } from "./Category.styles";
 
 import Commitment from "./Commitment";
-import DeleteCategoryDialog from "../../components/Dialogs/DeleteCategoryDialog";
 import CreateCommitmentDialog from "../../components/Dialogs/CreateCommitmentDialog";
 import CreateCategoryDialog from "../../components/Dialogs/CreateCategoryDialog";
+import DeleteDialog from "../../components/Dialogs/DeleteDialog";
 
 import { getCommitments } from "../../service/commitment";
 
@@ -44,11 +44,12 @@ const Category = ({ title, id, commitments }) => {
         title={title}
         id={id}
       />
-      <DeleteCategoryDialog
+      <DeleteDialog
         open={deleteDialog}
         setOpen={setDeleteDialog}
         name={title}
         id={id}
+        type="category"
       />
       <CreateCommitmentDialog
         open={createCommitment}
