@@ -19,8 +19,12 @@ import {
   StyledTextField,
 } from "../../styles/GlobalStyles";
 
+import { useDispatch } from "react-redux";
 import { addCommitment, editCommitment } from "../../service/commitment";
-import { addCommitmentAction } from "../../redux/actions/commitmentActions";
+import {
+  addCommitmentAction,
+  editCommitmentAction,
+} from "../../redux/actions/commitmentActions";
 
 /**
  *
@@ -39,8 +43,11 @@ const CreateCommitmentDialog = ({
   commitmentNotes,
   categoryId,
   id,
+  actionables,
 }) => {
+  const dispatch = useDispatch();
   const formRef = useRef("form");
+
   const [name, setName] = useState("");
   const [selectedDate, setSelectedDate] = React.useState(
     new Date("2014-08-18T21:11:54")
@@ -70,17 +77,19 @@ const CreateCommitmentDialog = ({
         title: name,
         deadline: selectedDate,
         notes: notes,
+        actionables: actionables,
       };
       editCommitment(payload);
 
       // redux call
-      //
+      dispatch(editCommitmentAction(categoryId, payload));
     } else {
       const payload = {
         category_id: categoryId,
         title: name,
         deadline: selectedDate,
         notes: notes,
+        actionables: [],
       };
       console.log("payload", payload);
       addCommitment(payload);

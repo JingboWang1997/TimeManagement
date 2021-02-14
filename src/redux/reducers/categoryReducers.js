@@ -44,6 +44,20 @@ function categoryReducer(state = { categories: [] }, action) {
         console.log(action.commitment);
         // if (category.id === action.commitment)
       }
+    case EDIT_COMMITMENT:
+      console.log("EDIT_COMMITMENT");
+      state.categories = state.categories.map((category) => {
+        if (category.id === action.categoryId) {
+          category.commitments = category.commitments.map((commitment) => {
+            if (commitment.id === action.commitment.id) {
+              commitment = action.commitment;
+            }
+            return commitment;
+          });
+        }
+        return category;
+      });
+      return Object.assign({}, state);
     case DELETE_COMMITMENT:
       state.categories = state.categories.map((c) => {
         if (c.id == action.categoryId) {

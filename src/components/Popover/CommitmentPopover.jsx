@@ -18,7 +18,13 @@ import DeleteDialog from "../Dialogs/DeleteDialog";
  * @param {string} commitmentId - Commitment ID
  * @param {string} title - Name of commitment
  */
-function CommitmentPopover({ title, notes, commitmentId, categoryId }) {
+function CommitmentPopover({
+  title,
+  notes,
+  commitmentId,
+  categoryId,
+  actionables,
+}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -46,6 +52,7 @@ function CommitmentPopover({ title, notes, commitmentId, categoryId }) {
         commitmentNotes={notes}
         id={commitmentId}
         categoryId={categoryId}
+        actionables={actionables}
       />
       <DeleteDialog
         open={deleteDialog}

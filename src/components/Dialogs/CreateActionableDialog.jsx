@@ -42,14 +42,17 @@ const CreateActionableDialog = ({
   const [deleteDialog, setDeleteDialog] = useState(false);
 
   const enterDialog = () => {
-    setName(title);
-    setDuration(durationInit);
-    setDescription(descriptionInit);
-    setUrl(urlInit);
+    setName(title || "");
+    setDuration(durationInit || "");
+    setDescription(descriptionInit || "");
+    setUrl(urlInit || "");
   };
 
   const closeDialog = () => {
     setName("");
+    setDuration("");
+    setDescription("");
+    setUrl("");
     setOpen(false);
   };
 

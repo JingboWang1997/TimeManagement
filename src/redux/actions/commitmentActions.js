@@ -30,10 +30,11 @@ export function deleteCommitmentAction(categoryId, id) {
   };
 }
 
-export function editCommitmentAction(commitment) {
+export function editCommitmentAction(categoryId, commitment) {
   console.log(log + "editCommitment");
   return {
     type: EDIT_COMMITMENT,
+    categoryId,
     commitment,
   };
 }

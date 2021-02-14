@@ -56,6 +56,7 @@ const Commitment = ({
             commitmentId={id}
             categoryId={categoryId}
             notes={notes}
+            actionables={actionables}
           />
         </CommitmentTitleBox>
 
