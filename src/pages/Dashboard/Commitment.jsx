@@ -14,7 +14,7 @@ import Actionable from "./Actionable";
 import CreateActionableDialog from "../../components/Dialogs/CreateActionableDialog";
 
 /**
- *
+ * Render a single commitment
  * @param {string} categoryId - Category ID
  * @param {string} id - Commitment ID
  * @param {string} title - Name of commitment

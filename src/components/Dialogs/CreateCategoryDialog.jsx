@@ -22,6 +22,9 @@ import {
   getCategories,
 } from "../../service/category";
 
+/**
+ * Dialog to edit and create a category
+ */
 const CreateCategoryDialog = ({ open, setOpen, editMode, title, id }) => {
   const dispatch = useDispatch();
   const formRef = useRef("form");
@@ -99,6 +102,7 @@ CreateCategoryDialog.propTypes = {
   setOpen: PropTypes.func,
   editMode: PropTypes.bool,
   title: PropTypes.string,
+  id: PropTypes.string,
 };
 
 export default CreateCategoryDialog;

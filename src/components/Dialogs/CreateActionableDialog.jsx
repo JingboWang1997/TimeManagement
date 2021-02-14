@@ -17,7 +17,11 @@ import DeleteDialog from "../Dialogs/DeleteDialog";
 
 import { useDispatch } from "react-redux";
 import { addActionable, editActionable } from "../../service/actionable";
+import { editActionableAction } from "../../redux/actions/actionableActions";
 
+/**
+ * Dialog to edit and create an actionable
+ */
 const CreateActionableDialog = ({
   open,
   setOpen,
@@ -69,7 +73,9 @@ const CreateActionableDialog = ({
         description: description,
         url: url,
       };
-      editActionable(payload);
+      editActionable(payload).then(() => {
+        dispatch(editActionableAction(categoryId, commitmentId, payload));
+      });
     } else {
       // api call to create actionable
       const payload = {
@@ -180,6 +186,7 @@ const CreateActionableDialog = ({
 CreateActionableDialog.propTypes = {
   open: PropTypes.bool,
   setOpen: PropTypes.func,
+  categoryId: PropTypes.string,
   commitmentId: PropTypes.string,
   id: PropTypes.string,
   title: PropTypes.string,

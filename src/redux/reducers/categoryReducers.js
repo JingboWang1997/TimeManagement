@@ -27,15 +27,18 @@ function categoryReducer(state = { categories: [] }, action) {
       return Object.assign({}, state, {
         categories: [...state.categories, action.category],
       });
+
     case GET_CATEGORIES:
       // console.log(log + GET_CATEGORIES);
       return Object.assign({}, state, {
         categories: action.categories,
       });
+
     case DELETE_CATEGORY:
       // console.log(log + DELETE_CATEGORY);
       state.categories = state.categories.filter((c) => c.id !== action.id);
       return Object.assign({}, state);
+
     case EDIT_CATEGORY:
       // console.log(log + EDIT_CATEGORY);
       state.categories = state.categories.map((c) => {
@@ -52,6 +55,7 @@ function categoryReducer(state = { categories: [] }, action) {
         console.log(action.commitment);
         // if (category.id === action.commitment)
       }
+
     case EDIT_COMMITMENT:
       console.log("EDIT_COMMITMENT");
       state.categories = state.categories.map((category) => {
@@ -66,6 +70,7 @@ function categoryReducer(state = { categories: [] }, action) {
         return category;
       });
       return Object.assign({}, state);
+
     case DELETE_COMMITMENT:
       state.categories = state.categories.map((c) => {
         if (c.id == action.categoryId) {
@@ -78,6 +83,27 @@ function categoryReducer(state = { categories: [] }, action) {
       return Object.assign({}, state);
 
     // ACTIONABLES
+    case EDIT_ACTIONABLE:
+      state.categories = state.categories.map((category) => {
+        if (category.id === action.categoryId) {
+          category.commitments = category.commitments.map((commitment) => {
+            if (commitment.id === action.commitmentId) {
+              commitment.actionables = commitment.actionables.map(
+                (actionable) => {
+                  if (actionable.id === action.actionable.id) {
+                    actionable = action.actionable;
+                  }
+                  return actionable;
+                }
+              );
+            }
+            return commitment;
+          });
+        }
+        return category;
+      });
+      return Object.assign({}, state);
+
     case DELETE_ACTIONABLE:
       state.categories = state.categories.map((category) => {
         if (category.id === action.categoryId) {

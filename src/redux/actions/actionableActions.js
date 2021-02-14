@@ -20,7 +20,6 @@ export function getActionablesAction(actionables) {
 }
 
 export function deleteActionableAction(categoryId, commitmentId, id) {
-  console.log("DELETE ACTION", categoryId, commitmentId, id);
   return {
     type: DELETE_ACTIONABLE,
     categoryId,
@@ -29,11 +28,11 @@ export function deleteActionableAction(categoryId, commitmentId, id) {
   };
 }
 
-export function editActionableAction(categoryId, commitmentId, id) {
+export function editActionableAction(categoryId, commitmentId, actionable) {
   return {
     type: EDIT_ACTIONABLE,
     categoryId,
     commitmentId,
-    id,
+    actionable,
   };
 }

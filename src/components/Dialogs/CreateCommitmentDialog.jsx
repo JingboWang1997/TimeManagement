@@ -27,7 +27,7 @@ import {
 } from "../../redux/actions/commitmentActions";
 
 /**
- *
+ * Dialog to edit and create a commitment
  * @param {boolean} open Whether dialog is open
  * @param {func} setOpen
  * @param {boolean} editMode Whether in edit or create mode
@@ -174,6 +174,10 @@ CreateCommitmentDialog.propTypes = {
   setOpen: PropTypes.func.isRequired,
   editMode: PropTypes.bool,
   title: PropTypes.string,
+  commitmentNotes: PropTypes.string,
+  categoryId: PropTypes.string,
+  id: PropTypes.string,
+  actionables: PropTypes.array,
 };
 
 export default CreateCommitmentDialog;

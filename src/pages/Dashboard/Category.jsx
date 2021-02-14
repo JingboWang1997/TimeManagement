@@ -19,7 +19,7 @@ import CreateCategoryDialog from "../../components/Dialogs/CreateCategoryDialog"
 import DeleteDialog from "../../components/Dialogs/DeleteDialog";
 
 /**
- *
+ * Render a single Category
  * @param {string} title - Name of category
  * @param {string} id - Category ID
  * @param {Array} commitments - List of commitments in category

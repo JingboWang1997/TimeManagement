@@ -18,6 +18,9 @@ import {
 
 import CreateActionableDialog from "../../components/Dialogs/CreateActionableDialog";
 
+/**
+ * Render a single Actionable
+ */
 const Actionable = ({
   categoryId,
   commitmentId,
@@ -88,6 +91,9 @@ const Actionable = ({
 };
 
 Actionable.propTypes = {
+  categoryId: PropTypes.string,
+  commitmentId: PropTypes.string,
+  id: PropTypes.string,
   title: PropTypes.string,
   duration: PropTypes.string,
   deadline: PropTypes.string,
