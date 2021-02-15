@@ -50,7 +50,7 @@ const Commitment = ({
           <FlexVCenter>
             <Header3>{title}</Header3>
             <DeadlineText>
-              ({moment(new Date(deadline)).format("LL")})
+              ({moment(new Date(deadline)).format("MMM D")})
             </DeadlineText>
           </FlexVCenter>
           <CommitmentPopover

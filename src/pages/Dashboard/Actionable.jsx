@@ -80,7 +80,7 @@ const Actionable = ({
             <FlexBox>
               <Header4Light>{duration}</Header4Light>
               <DeadlineText>
-                {moment(new Date(deadline)).format("LL")}
+                {moment(new Date(deadline)).format("MMM D")}
               </DeadlineText>
             </FlexBox>
           </ActionableTitleBox>

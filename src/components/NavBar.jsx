@@ -1,6 +1,7 @@
 import React from "react";
+import moment from "moment";
 import styled from "styled-components";
-import { Header1, Header3, Colors } from "../styles/GlobalStyles";
+import { Header1, Colors } from "../styles/GlobalStyles";
 
 const NavBox = styled.div`
   display: flex;
@@ -14,7 +15,7 @@ const NavBar = () => {
   return (
     <NavBox>
       <Header1>Time Management</Header1>
-      <Header1>Today is Dec 18th</Header1>
+      <Header1>Today is {moment().format("MMM Do")}</Header1>
       <Header1>Emily Chen</Header1>
     </NavBox>
   );
